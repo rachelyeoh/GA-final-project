@@ -1,0 +1,9 @@
+/* .new-task-button {
+    float: right;
+} */
+
+.status {
+    padding: 0.5rem;
+    margin: 0.5rem 2rem 0.5rem 0;
+    border-radius: 5px;
+}

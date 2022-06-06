@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    <link href="./styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- start of nav bar -->
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">TD-List</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#">#Groceries</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">#Homework</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">#Features</a>
+            </li>
+          </ul>
+          <!-- New tag button -->
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#newtagModal"
+          >
+            New Tag
+          </button>
+
+          <!-- New tag Modal -->
+          <div
+            class="modal fade"
+            id="newtagModal"
+            tabindex="-1"
+            aria-labelledby="newtagModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="newtagModalLabel">New tag</h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <div class="form-floating">
+                    <textarea
+                      class="form-control"
+                      placeholder="Leave a comment here"
+                      id="newTagTextarea"
+                    ></textarea>
+                    <label for="newTagTextarea">Enter new tag</label>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    id="newTagTextarea"
+                    type="button"
+                    class="btn btn-primary"
+                  >
+                    Create tag
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end of new tag button -->
+        </div>
+      </div>
+    </nav>
+    <!-- end of nav bar -->
+    <!-- Title -->
+    <div class="card bg-info bg-gradient">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-10">
+            <h3>#Groceries</h3>
+          </div>
+          <div class="col-2">
+            <!-- Button trigger modal -->
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#newTaskModal"
+            >
+              New Task
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of Title -->
+    <!-- New form popup modal -->
+    <div
+      class="modal fade"
+      id="newTaskModal"
+      tabindex="-1"
+      aria-labelledby="newTaskModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="newTaskModalLabel">New Task</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- New Task Form -->
+            <form>
+              <!-- Task name -->
+              <div class="mb-3">
+                <label for="taskname" class="form-label">Task name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="taskname"
+                  aria-describedby="taskname"
+                />
+              </div>
+              <!-- Description -->
+              <div class="mb-3">
+                <label for="descname" class="form-label">Description</label>
+                <textarea
+                  id="descname"
+                  class="form-control"
+                  aria-label="With textarea"
+                ></textarea>
+                <div id="descHelp" class="form-text">Describe the task</div>
+              </div>
+              <!-- Assign to -->
+              <div class="mb-3">
+                <label for="assigneename" class="form-label">Assignee</label>
+                <div class="input-group">
+                  <input
+                    id="assigneename"
+                    type="text"
+                    placeholder="first name"
+                    aria-label="First name"
+                    class="form-control"
+                  />
+                  <input
+                    id="assigneename"
+                    type="text"
+                    placeholder="last name"
+                    aria-label="Last name"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <!-- Due date -->
+              <div class="mb-3">
+                <label for="duedate" class="form-label">Due Date</label>
+                <div class="input-group">
+                  <input
+                    id="duedate"
+                    type="date"
+                    aria-label="Due date"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <!-- Status -->
+              <div class="mb-3">
+                <label for="status" class="form-label">Status</label>
+                <select
+                  id="status"
+                  class="form-select"
+                  aria-label="Default select example"
+                >
+                  <option class="bg-warning" selected>In Progress</option>
+                  <option class="bg-success">Done</option>
+                  <option class="bg-light">To do</option>
+                  <option class="bg-danger">To review</option>
+                </select>
+              </div>
+            </form>
+            <!-- end of New Task Form -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Create Task</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of New form pop up modal -->
+    <!-- Edit form popup modal -->
+    <div
+      class="modal fade"
+      id="editTaskModal"
+      tabindex="-1"
+      aria-labelledby="editTaskModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editTaskModalLabel">Edit Task</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <!-- New Task Form -->
+            <form>
+              <!-- Task name -->
+              <div class="mb-3">
+                <label for="taskname" class="form-label">Task name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="taskname"
+                  aria-describedby="taskname"
+                />
+              </div>
+              <!-- Description -->
+              <div class="mb-3">
+                <label for="descname" class="form-label">Description</label>
+                <textarea
+                  id="descname"
+                  class="form-control"
+                  aria-label="With textarea"
+                ></textarea>
+                <div id="descHelp" class="form-text">Describe the task</div>
+              </div>
+              <!-- Assign to -->
+              <div class="mb-3">
+                <label for="assigneename" class="form-label">Assignee</label>
+                <div class="input-group">
+                  <input
+                    id="assigneename"
+                    type="text"
+                    placeholder="first name"
+                    aria-label="First name"
+                    class="form-control"
+                  />
+                  <input
+                    id="assigneename"
+                    type="text"
+                    placeholder="last name"
+                    aria-label="Last name"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <!-- Due date -->
+              <div class="mb-3">
+                <label for="duedate" class="form-label">Due Date</label>
+                <div class="input-group">
+                  <input
+                    id="duedate"
+                    type="date"
+                    aria-label="Due date"
+                    class="form-control"
+                  />
+                </div>
+              </div>
+              <!-- Status -->
+              <div class="mb-3">
+                <label for="status" class="form-label">Status</label>
+                <select
+                  id="status"
+                  class="form-select"
+                  aria-label="Default select example"
+                >
+                  <option class="bg-warning" selected>In Progress</option>
+                  <option class="bg-success">Done</option>
+                  <option class="bg-light">To do</option>
+                  <option class="bg-danger">To review</option>
+                </select>
+              </div>
+            </form>
+            <!-- end of New Task Form -->
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Create Task</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of edit form pop up modal -->
+    <!-- start of description Modal -->
+    <div
+      class="modal fade"
+      id="descModal"
+      tabindex="-1"
+      aria-labelledby="descModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="descModalLabel">Description</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">...</div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of description modal -->
+    <!-- Individual task -->
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-9">
+            <h5>Task Name</h5>
+          </div>
+          <div class="col-3">
+            <select class="status">
+              <option class="bg-warning" selected>In Progress</option>
+              <option class="bg-success">Done</option>
+              <option class="bg-light">To do</option>
+              <option class="bg-danger">To review</option>
+            </select>
+          </div>
+          <div class="row"></div>
+          <div class="col-5">
+            <h6>Assign to:</h6>
+          </div>
+          <div class="col-4">
+            <h6>Due date:</h6>
+          </div>
+          <div class="col-3">
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#descModal"
+            >
+              View description
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#editTaskModal"
+            >
+              Edit Task
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of Individual task -->
+    <!-- 2nd Individual task -->
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-9">
+            <h5>Task Name</h5>
+          </div>
+          <div class="col-3">
+            <select class="status">
+              <option class="bg-warning">In Progress</option>
+              <option class="bg-success">Done</option>
+              <option class="bg-light">To do</option>
+              <option class="bg-danger">To review</option>
+            </select>
+          </div>
+          <div class="row"></div>
+          <div class="col-5">
+            <h6>Assign to:</h6>
+          </div>
+          <div class="col-4">
+            <h6>Due date:</h6>
+          </div>
+          <div class="col-3">
+            <!-- Button trigger modal -->
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#descModal"
+            >
+              View description
+            </button>
+
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#editTaskModal"
+            >
+              Edit Task
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of 2nd Individual task -->
+    <!-- Review -->
+    <div class="card bg-light bg-gradient">
+      <div class="card-body">
+        <h3>To Review tasks</h3>
+      </div>
+    </div>
+    <!-- end of Review Task  -->
+    <!-- 2nd Individual task -->
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-9">
+            <h5>Task Name</h5>
+          </div>
+          <div class="col-3">
+            <select class="status">
+              <option class="bg-warning">In Progress</option>
+              <option class="bg-success">Done</option>
+              <option class="bg-light">To do</option>
+              <option class="bg-danger">To review</option>
+            </select>
+          </div>
+          <div class="row"></div>
+          <div class="col-5">
+            <h6>Assign to:</h6>
+          </div>
+          <div class="col-4">
+            <h6>Due date:</h6>
+          </div>
+          <div class="col-3">
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#descModal"
+            >
+              View description
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#editTaskModal"
+            >
+              Edit Task
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of 2nd Individual task -->
+    <!-- 2nd Individual task -->
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-9">
+            <h5>Task Name</h5>
+          </div>
+          <div class="col-3">
+            <select class="status">
+              <option class="bg-warning">In Progress</option>
+              <option class="bg-success">Done</option>
+              <option class="bg-light">To do</option>
+              <option class="bg-danger">To review</option>
+            </select>
+          </div>
+          <div class="row"></div>
+          <div class="col-5">
+            <h6>Assign to:</h6>
+          </div>
+          <div class="col-4">
+            <h6>Due date:</h6>
+          </div>
+          <div class="col-3">
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#descModal"
+            >
+              View description
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#editTaskModal"
+            >
+              Edit Task
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of 2nd Individual task -->
+    <!-- Completed task -->
+    <div class="card bg-light bg-gradient">
+      <div class="card-body">
+        <h3>Completed tasks</h3>
+      </div>
+    </div>
+    <!-- end of Completed Task  -->
+    <!-- 2nd Individual task -->
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-9">
+            <h5>Task Name</h5>
+          </div>
+          <div class="col-3">
+            <select class="status">
+              <option class="bg-warning">In Progress</option>
+              <option class="bg-success">Done</option>
+              <option class="bg-light">To do</option>
+              <option class="bg-danger">To review</option>
+            </select>
+          </div>
+          <div class="row"></div>
+          <div class="col-5">
+            <h6>Assign to:</h6>
+          </div>
+          <div class="col-4">
+            <h6>Due date:</h6>
+          </div>
+          <div class="col-3">
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#descModal"
+            >
+              View description
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#editTaskModal"
+            >
+              Edit Task
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of 2nd Individual task -->
+    <!-- 2nd Individual task -->
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-9">
+            <h5>Task Name</h5>
+          </div>
+          <div class="col-3">
+            <select class="status">
+              <option class="bg-warning">In Progress</option>
+              <option class="bg-success">Done</option>
+              <option class="bg-light">To do</option>
+              <option class="bg-danger">To review</option>
+            </select>
+          </div>
+          <div class="row"></div>
+          <div class="col-5">
+            <h6>Assign to:</h6>
+          </div>
+          <div class="col-4">
+            <h6>Due date:</h6>
+          </div>
+          <div class="col-3">
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#descModal"
+            >
+              View description
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#editTaskModal"
+            >
+              Edit Task
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end of 2nd Individual task -->
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
