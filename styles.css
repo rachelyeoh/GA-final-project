@@ -17,3 +17,15 @@
 .ml-1 {
     margin-top: ($spacer * .25) !important;
   }
+
+.in-progress-heading {
+    background-color: rgba(252, 230, 63, 0.753);
+}
+
+.to-review-heading {
+    background-color: rgba(252, 82, 63, 0.753);
+}
+
+.completed-heading {
+    background-color: rgba(99, 254, 97, 0.753);
+}
