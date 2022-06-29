@@ -105,6 +105,10 @@
           <div class="row">
             <div class="col-10">
               <h3>#Groceries</h3>
+              <p class="fw-bold">
+                Today's date (d/m/y):
+                <span id="current-date" class="fw-normal">29/1/2000</span>
+              </p>
             </div>
             <div class="col-2">
               <!-- Button trigger modal -->
@@ -167,6 +171,9 @@
                     aria-label="With textarea"
                     required
                   ></textarea>
+                  <div id="descnameInvalidFeedback" class="invalid-feedback">
+                    Description must be longer than 15 characters.
+                  </div>
                   <div id="descHelp" class="form-text">Describe the task</div>
                 </div>
                 <!-- Assign to -->
@@ -181,6 +188,12 @@
                       class="form-control"
                       required
                     />
+                    <div
+                      id="assigneenameInvalidFeedback"
+                      class="invalid-feedback"
+                    >
+                      Fisrt Name must be longer than 8 characters.
+                    </div>
                     <input
                       id="assigneename"
                       type="text"
