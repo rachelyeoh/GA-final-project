@@ -35,6 +35,6 @@
 }
 
 /* Validation */
-.invalid-feedback {
-    display:none;
+.invalid-feedback, .descnameInvalidFeedback, .taskNameInvalidFeedback{
+    display: none;
 }

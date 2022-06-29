@@ -1,15 +1,27 @@
 /****************   Buttons   ****************/
 const createTaskButton = document.querySelector("#create-task")
 /****************   Input form   ****************/
+// FOR VALIDATION
 // Name
-const taskName = document.querySelectorAll(".taskname");
+let taskName = document.querySelectorAll(".taskname");
 const taskNameInvalidFeedback = document.querySelector(".taskNameInvalidFeedback");
 // Description
-const descname = document.querySelectorAll(".descname");
+let descname = document.querySelectorAll(".descname");
 const descnameInvalidFeedback = document.querySelector(".descnameInvalidFeedback");
 // Assignee
-const assigneename  = document.querySelectorAll(".assigneename");
+let assigneename  = document.querySelectorAll(".assigneename");
 const assigneenameInvalidFeedback = document.querySelector(".assigneenameInvalidFeedback");
+let assigneeLName = document.querySelectorAll(".assigneeLName");
+// TO CREATE TASK
+// Name
+let newTaskName = document.querySelector("#newTaskName")
+let newDescription = document.querySelector("#newDescription")
+let newAssigneeFName = document.querySelector("#newAssigneeFName")
+let newAssigneeLName = document.querySelector("#newAssigneeLName")
+let newDueDate = document.querySelector("#newDueDate")
+let newTaskStatus = document.querySelector("#newStatus")
+
+// TO UPDATE TASK
 /****************   Date   ****************/
 // Current date
 let currentDateSpan = document.querySelector("#current-date");
@@ -17,7 +29,7 @@ let todayDate = new Date();
 let date = `${todayDate.getDate()}/${todayDate.getMonth() + 1}/${todayDate.getFullYear()}`
 let todayDatePrimitive = todayDate[Symbol.toPrimitive]('number');
 // Due date
-const dueDate = document.querySelectorAll(".duedate");
+let dueDate = document.querySelectorAll(".duedate");
 const dueDateError = document.querySelector(".dueDateError")
 
 /****************   Display current date   ****************/
@@ -27,13 +39,13 @@ const changeCurrentDate = () => {
 
 changeCurrentDate();
 
+let eachName
 
 /****************   Form validation   ****************/
 taskName.forEach(name => {
     name.addEventListener('keyup', () => {
         // If input length for name is less than or equal to 8
         if(name.value.length <= 8) {
-            console.log(taskNameInvalidFeedback)
             taskNameInvalidFeedback.style.display = "inline";
             name.classList.add("is-invalid")
             name.focus();
@@ -87,7 +99,81 @@ dueDate.forEach(dueDate => {
 });
 
 /****************   Task Class/Object   ****************/
- 
+let newTask = [];
+class TaskManager {
+    constructor(name, description, assignedFName, assignedLName, dueDate, status) {
+      this.id = 0;
+      this.name = name;
+      this.description = description;
+      this.assignedFName = assignedFName;
+      this.assignedLName = assignedLName;
+      this.dueDate = dueDate;
+      this.status = status;
+    }
+    getAllTasks() {
+
+    }
+
+    getTasksWithStatus(status) {
+
+    }
+    addTask(name, description, assignedFName, assignedLName, dueDate, status) {
+        newTask.push(new TaskManager (this.id++, name, description, assignedFName, assignedLName, dueDate, status.value))
+    }
+};
+
+let taskCard;
+let descriptionModalText;
+let todoContainer = document.querySelector('#to-do');
+
+
+
+createTaskButton.addEventListener("click", e => {
+    e.preventDefault();
+    // newTask.push(new TaskManager
+    //     (this.id, newTaskName.value, newDescription.value, newAssigneeFName.value, newAssigneeLName.value, newDueDate.value, newTaskStatus.options[newTaskStatus.selectedIndex].value))     
+    //     console.log(newTask)
+    newTask.forEach(task => {
+        taskCard += 
+        `<div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
+            <div class="card-body">
+            <div class="row">
+                <div class="col-9">
+                <h5>${task.name}</h5>
+                <p>${task.description}</p>
+                </div>
+                <div class="col-3">
+                <select class="status">
+                    <option class="bg-light" selected>To do</option>
+                    <option class="bg-warning">In Progress</option>
+                    <option class="bg-success">Done</option>
+                    <option class="bg-danger">To review</option>
+                </select>
+                </div>
+                <div class="row"></div>
+                <div class="col-5">
+                <h6>Assign to: ${task.assignedFName + '' + task.assignedLName}</h6>
+                </div>
+                <div class="col-4">
+                <h6>Due date: ${task.dueDate}</h6>
+                </div>
+                <div class="col-3">
+                <button
+                    type="button"
+                    class="btn btn-warning m-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editTaskModal"
+                >
+                    Edit Task
+                </button>
+                <button class="btn btn-danger" type="button">Delete</button>
+                </div>
+            </div>
+            </div>
+        </div>` 
+        todoContainer.innerHTML = taskCard;
+    })
+})
 
 
 /****************   Display task   ****************/

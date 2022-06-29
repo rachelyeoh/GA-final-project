@@ -152,6 +152,8 @@
                 <div class="mb-3">
                   <label for="taskname" class="form-label">Task name</label>
                   <input
+                    id="newTaskName"
+                    name="taskname"
                     type="text"
                     class="form-control taskname"
                     aria-describedby="taskname"
@@ -165,6 +167,8 @@
                 <div class="mb-3">
                   <label for="descname" class="form-label">Description</label>
                   <textarea
+                    id="newDescription"
+                    name="description"
                     class="form-control descname"
                     aria-label="With textarea"
                     required
@@ -179,6 +183,8 @@
                   <label for="assigneename" class="form-label">Assignee</label>
                   <div class="input-group">
                     <input
+                      id="newAssigneeFName"
+                      name="assigneeFName"
                       type="text"
                       placeholder="first name"
                       aria-label="First name"
@@ -189,10 +195,12 @@
                       First Name must be longer than 8 characters.
                     </div>
                     <input
+                      id="newAssigneeLName"
+                      name="assigneeLName"
                       type="text"
                       placeholder="last name"
                       aria-label="Last name"
-                      class="form-control"
+                      class="form-control assigneeLName"
                     />
                   </div>
                 </div>
@@ -201,6 +209,8 @@
                   <label for="duedate" class="form-label">Due Date</label>
                   <div class="input-group">
                     <input
+                      id="newDueDate"
+                      name="dueDate"
                       type="date"
                       aria-label="Due date"
                       class="form-control duedate"
@@ -215,7 +225,8 @@
                 <div class="mb-3">
                   <label for="status" class="form-label">Status</label>
                   <select
-                    id="status"
+                    id="newStatus"
+                    name="status"
                     class="form-select"
                     aria-label="Default select example"
                   >
@@ -308,7 +319,7 @@
                       type="text"
                       placeholder="last name"
                       aria-label="Last name"
-                      class="form-control"
+                      class="form-control assigneeLName"
                     />
                   </div>
                 </div>
@@ -341,7 +352,7 @@
                     <option class="bg-danger">To review</option>
                   </select>
                 </div>
-              </form>
+              
               <!-- end of Edit Task Form -->
             </div>
             <div class="modal-footer">
@@ -349,12 +360,13 @@
                 Make changes
               </button>
             </div>
+          </form>
           </div>
         </div>
       </div>
       <!-- end of edit form pop up modal -->
       <!-- start of description Modal -->
-      <div
+      <!-- <div
         class="modal fade"
         id="descModal"
         tabindex="-1"
@@ -364,7 +376,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="descModalLabel">Description</h5>
+              <h5 class="modal-title description-text" id="descModalLabel">Description</h5>
               <button
                 type="button"
                 class="btn-close"
@@ -384,7 +396,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <!-- end of description modal -->
       <section class="list-group">
         <!-- To do task -->
