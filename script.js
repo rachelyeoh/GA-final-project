@@ -20,6 +20,7 @@ let newAssigneeFName = document.querySelector("#newAssigneeFName")
 let newAssigneeLName = document.querySelector("#newAssigneeLName")
 let newDueDate = document.querySelector("#newDueDate")
 let newTaskStatus = document.querySelector("#newStatus")
+let newTaskForm = document.querySelector("#newTaskForm")
 
 // TO UPDATE TASK
 /****************   Date   ****************/
@@ -45,7 +46,7 @@ let eachName
 taskName.forEach(name => {
     name.addEventListener('keyup', () => {
         // If input length for name is less than or equal to 8
-        if(name.value.length <= 8) {
+        if(name.value.length >= 9) {
             taskNameInvalidFeedback.style.display = "inline";
             name.classList.add("is-invalid")
             name.focus();
@@ -59,7 +60,7 @@ taskName.forEach(name => {
 descname.forEach(desc => {
     desc.addEventListener('keyup', () => {
         // If input length for description is less than or equal to 15
-        if(desc.value.length <= 15) {
+        if(desc.value.length >= 16) {
             descnameInvalidFeedback.style.display = "inline";
             desc.classList.add("is-invalid")
             desc.focus();
@@ -73,7 +74,7 @@ descname.forEach(desc => {
 assigneename.forEach(assignee => {
     assignee.addEventListener('keyup', () => {
         // If input length for assignee first name is less than or equal to 8
-        if(assignee.value.length <= 8) {
+        if(assignee.value.length >= 9) {
             assigneenameInvalidFeedback.style.display = "inline";
             assignee.classList.add("is-invalid")
             assignee.focus();
@@ -102,7 +103,7 @@ dueDate.forEach(dueDate => {
 let newTask = [];
 class TaskManager {
     constructor(name, description, assignedFName, assignedLName, dueDate, status) {
-      this.id = 0;
+      this.id = newTask.length;
       this.name = name;
       this.description = description;
       this.assignedFName = assignedFName;
@@ -117,22 +118,25 @@ class TaskManager {
     getTasksWithStatus(status) {
 
     }
-    addTask(name, description, assignedFName, assignedLName, dueDate, status) {
-        newTask.push(new TaskManager (this.id++, name, description, assignedFName, assignedLName, dueDate, status.value))
-    }
 };
 
 let taskCard;
 let descriptionModalText;
 let todoContainer = document.querySelector('#to-do');
 
+/****************   Form Submission Event   ****************/
 
-
-createTaskButton.addEventListener("click", e => {
+newTaskForm.addEventListener("submit", e => {
     e.preventDefault();
-    // newTask.push(new TaskManager
-    //     (this.id, newTaskName.value, newDescription.value, newAssigneeFName.value, newAssigneeLName.value, newDueDate.value, newTaskStatus.options[newTaskStatus.selectedIndex].value))     
-    //     console.log(newTask)
+    let taskName = e.target.taskname.value
+    let description = e.target.description.value
+    let assigneeFirstName = e.target.assigneeFName.value
+    let assigneeLastName = e.target.assigneeLName.value
+    let dueDate = e.target.dueDate.value
+    let status = e.target.status.value
+    let taskCard = ''
+    newTask.push(new TaskManager(taskName, description, assigneeFirstName, assigneeLastName, dueDate, status))
+    e.target.reset()
     newTask.forEach(task => {
         taskCard += 
         `<div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
