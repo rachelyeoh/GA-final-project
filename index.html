@@ -149,16 +149,15 @@
               <!-- New Task Form -->
               <form>
                 <!-- Task name -->
-                <div class="mb-3 taskname">
+                <div class="mb-3">
                   <label for="taskname" class="form-label">Task name</label>
                   <input
                     type="text"
-                    class="form-control"
-                    id="taskname"
+                    class="form-control taskname"
                     aria-describedby="taskname"
                     required
                   />
-                  <div id="taskNameInvalidFeedback" class="invalid-feedback">
+                  <div class="invalid-feedback taskNameInvalidFeedback">
                     Name must be longer than 8 characters.
                   </div>
                 </div>
@@ -166,12 +165,11 @@
                 <div class="mb-3">
                   <label for="descname" class="form-label">Description</label>
                   <textarea
-                    id="descname"
-                    class="form-control"
+                    class="form-control descname"
                     aria-label="With textarea"
                     required
                   ></textarea>
-                  <div id="descnameInvalidFeedback" class="invalid-feedback">
+                  <div class="invalid-feedback descnameInvalidFeedback">
                     Description must be longer than 15 characters.
                   </div>
                   <div id="descHelp" class="form-text">Describe the task</div>
@@ -181,21 +179,16 @@
                   <label for="assigneename" class="form-label">Assignee</label>
                   <div class="input-group">
                     <input
-                      id="assigneename"
                       type="text"
                       placeholder="first name"
                       aria-label="First name"
-                      class="form-control"
+                      class="form-control assigneename"
                       required
                     />
-                    <div
-                      id="assigneenameInvalidFeedback"
-                      class="invalid-feedback"
-                    >
+                    <div class="invalid-feedback assigneenameInvalidFeedback">
                       First Name must be longer than 8 characters.
                     </div>
                     <input
-                      id="assigneename"
                       type="text"
                       placeholder="last name"
                       aria-label="Last name"
@@ -208,13 +201,12 @@
                   <label for="duedate" class="form-label">Due Date</label>
                   <div class="input-group">
                     <input
-                      id="duedate"
                       type="date"
                       aria-label="Due date"
-                      class="form-control"
+                      class="form-control duedate"
                       required
                     />
-                    <div id="dueDateError" class="invalid-feedback">
+                    <div class="invalid-feedback dueDateError">
                       Due date needs to be a future date.
                     </div>
                   </div>
@@ -270,26 +262,32 @@
               ></button>
             </div>
             <div class="modal-body">
-              <!-- New Task Form -->
+              <!-- Edit Task Form -->
               <form>
                 <!-- Task name -->
                 <div class="mb-3">
                   <label for="taskname" class="form-label">Task name</label>
                   <input
                     type="text"
-                    class="form-control"
-                    id="taskname"
+                    class="form-control taskname"
                     aria-describedby="taskname"
+                    required
                   />
+                  <div class="invalid-feedback taskNameInvalidFeedback">
+                    Name must be longer than 8 characters.
+                  </div>
                 </div>
                 <!-- Description -->
                 <div class="mb-3">
                   <label for="descname" class="form-label">Description</label>
                   <textarea
-                    id="descname"
-                    class="form-control"
+                    class="form-control descname"
                     aria-label="With textarea"
+                    required
                   ></textarea>
+                  <div class="invalid-feedback descnameInvalidFeedback">
+                    Description must be longer than 15 characters.
+                  </div>
                   <div id="descHelp" class="form-text">Describe the task</div>
                 </div>
                 <!-- Assign to -->
@@ -297,14 +295,16 @@
                   <label for="assigneename" class="form-label">Assignee</label>
                   <div class="input-group">
                     <input
-                      id="assigneename"
                       type="text"
                       placeholder="first name"
                       aria-label="First name"
-                      class="form-control"
+                      class="form-control assigneename"
+                      required
                     />
+                    <div class="invalid-feedback assigneenameInvalidFeedback">
+                      First Name must be longer than 8 characters.
+                    </div>
                     <input
-                      id="assigneename"
                       type="text"
                       placeholder="last name"
                       aria-label="Last name"
@@ -317,11 +317,14 @@
                   <label for="duedate" class="form-label">Due Date</label>
                   <div class="input-group">
                     <input
-                      id="duedate"
                       type="date"
                       aria-label="Due date"
-                      class="form-control"
+                      class="form-control duedate"
+                      required
                     />
+                    <div class="invalid-feedback dueDateError">
+                      Due date needs to be a future date.
+                    </div>
                   </div>
                 </div>
                 <!-- Status -->
@@ -339,10 +342,12 @@
                   </select>
                 </div>
               </form>
-              <!-- end of New Task Form -->
+              <!-- end of Edit Task Form -->
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary">Create Task</button>
+              <button type="submit" class="btn btn-primary">
+                Make changes
+              </button>
             </div>
           </div>
         </div>
