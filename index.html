@@ -145,7 +145,7 @@
               <!-- New Task Form -->
               <form>
                 <!-- Task name -->
-                <div class="mb-3">
+                <div class="mb-3 taskname">
                   <label for="taskname" class="form-label">Task name</label>
                   <input
                     type="text"
@@ -154,6 +154,9 @@
                     aria-describedby="taskname"
                     required
                   />
+                  <div id="taskNameInvalidFeedback" class="invalid-feedback">
+                    Name must be longer than 8 characters.
+                  </div>
                 </div>
                 <!-- Description -->
                 <div class="mb-3">
@@ -216,7 +219,11 @@
                 </div>
                 <div class="modal-footer">
                   <input class="btn btn-primary" type="reset" value="Reset" />
-                  <button type="submit" class="btn btn-success">
+                  <button
+                    id="create-task"
+                    type="submit"
+                    class="btn btn-success"
+                  >
                     Create Task
                   </button>
                 </div>
