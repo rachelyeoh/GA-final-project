@@ -84,7 +84,7 @@
                     <button
                       id="newTagTextarea"
                       type="button"
-                      class="btn btn-primary"
+                      class="btn btn-success"
                     >
                       Create tag
                     </button>
@@ -116,6 +116,7 @@
               >
                 New Task
               </button>
+              <button type="button" class="btn btn-danger">Delete Tag</button>
             </div>
           </div>
         </div>
@@ -151,6 +152,7 @@
                     class="form-control"
                     id="taskname"
                     aria-describedby="taskname"
+                    required
                   />
                 </div>
                 <!-- Description -->
@@ -160,6 +162,7 @@
                     id="descname"
                     class="form-control"
                     aria-label="With textarea"
+                    required
                   ></textarea>
                   <div id="descHelp" class="form-text">Describe the task</div>
                 </div>
@@ -173,6 +176,7 @@
                       placeholder="first name"
                       aria-label="First name"
                       class="form-control"
+                      required
                     />
                     <input
                       id="assigneename"
@@ -192,6 +196,7 @@
                       type="date"
                       aria-label="Due date"
                       class="form-control"
+                      required
                     />
                   </div>
                 </div>
@@ -211,7 +216,7 @@
                 </div>
                 <div class="modal-footer">
                   <input class="btn btn-primary" type="reset" value="Reset" />
-                  <button type="button" class="btn btn-primary">
+                  <button type="submit" class="btn btn-success">
                     Create Task
                   </button>
                 </div>
@@ -354,744 +359,836 @@
       </div>
       <!-- end of description modal -->
       <section class="list-group">
+        <!-- To do task -->
+        <div
+          role="button"
+          class="card to-do-heading"
+          data-bs-toggle="collapse"
+          data-bs-target="#to-do"
+        >
+          <div class="card-body">
+            <h4>To do tasks</h4>
+          </div>
+        </div>
+        <div id="to-do" class="tasks-container collapse">
+          <!-- Individual task -->
+          <div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-9">
+                  <h5>Task Name</h5>
+                </div>
+                <div class="col-3">
+                  <select class="status">
+                    <option class="bg-warning" selected>In Progress</option>
+                    <option class="bg-success">Done</option>
+                    <option class="bg-light">To do</option>
+                    <option class="bg-danger">To review</option>
+                  </select>
+                </div>
+                <div class="row"></div>
+                <div class="col-5">
+                  <h6>Assign to:</h6>
+                </div>
+                <div class="col-4">
+                  <h6>Due date:</h6>
+                </div>
+                <div class="col-3">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#descModal"
+                  >
+                    View description
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-warning m-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editTaskModal"
+                  >
+                    Edit Task
+                  </button>
+                  <button class="btn btn-danger" type="button">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end of Individual task -->
+          <!-- 2nd Individual task -->
+          <div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-9">
+                  <h5>Task Name</h5>
+                </div>
+                <div class="col-3">
+                  <select class="status">
+                    <option class="bg-warning">In Progress</option>
+                    <option class="bg-success">Done</option>
+                    <option class="bg-light">To do</option>
+                    <option class="bg-danger">To review</option>
+                  </select>
+                </div>
+                <div class="row"></div>
+                <div class="col-5">
+                  <h6>Assign to:</h6>
+                </div>
+                <div class="col-4">
+                  <h6>Due date:</h6>
+                </div>
+                <div class="col-3">
+                  <!-- Button trigger modal -->
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#descModal"
+                  >
+                    View description
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-warning m-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editTaskModal"
+                  >
+                    Edit Task
+                  </button>
+                  <button class="btn btn-danger" type="button">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end of 2nd Individual task -->
+        </div>
+      </section>
+
+      <section class="list-group">
         <!-- In Progress task -->
-        <div class="card in-progress-heading">
+        <div
+          role="button"
+          class="card in-progress-heading"
+          data-bs-toggle="collapse"
+          data-bs-target="#in-progress"
+        >
           <div class="card-body">
             <h4>In progress tasks</h4>
           </div>
         </div>
-        <!-- Individual task -->
-        <div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-9">
-                <h5>Task Name</h5>
-              </div>
-              <div class="col-3">
-                <select class="status">
-                  <option class="bg-warning" selected>In Progress</option>
-                  <option class="bg-success">Done</option>
-                  <option class="bg-light">To do</option>
-                  <option class="bg-danger">To review</option>
-                </select>
-              </div>
-              <div class="row"></div>
-              <div class="col-5">
-                <h6>Assign to:</h6>
-              </div>
-              <div class="col-4">
-                <h6>Due date:</h6>
-              </div>
-              <div class="col-3">
-                <button class="btn btn-primary m-2" type="button">
-                  Delete
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#descModal"
-                >
-                  View description
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary m-2"
-                  data-bs-toggle="modal"
-                  data-bs-target="#editTaskModal"
-                >
-                  Edit Task
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- end of Individual task -->
-        <!-- 2nd Individual task -->
-        <div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-9">
-                <h5>Task Name</h5>
-              </div>
-              <div class="col-3">
-                <select class="status">
-                  <option class="bg-warning">In Progress</option>
-                  <option class="bg-success">Done</option>
-                  <option class="bg-light">To do</option>
-                  <option class="bg-danger">To review</option>
-                </select>
-              </div>
-              <div class="row"></div>
-              <div class="col-5">
-                <h6>Assign to:</h6>
-              </div>
-              <div class="col-4">
-                <h6>Due date:</h6>
-              </div>
-              <div class="col-3">
-                <!-- Button trigger modal -->
-                <button class="btn btn-primary m-2" type="button">
-                  Delete
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#descModal"
-                >
-                  View description
-                </button>
-
-                <button
-                  type="button"
-                  class="btn btn-primary m-2"
-                  data-bs-toggle="modal"
-                  data-bs-target="#editTaskModal"
-                >
-                  Edit Task
-                </button>
+        <div id="in-progress" class="tasks-container collapse">
+          <!-- Individual task -->
+          <div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-9">
+                  <h5>Task Name</h5>
+                </div>
+                <div class="col-3">
+                  <select class="status">
+                    <option class="bg-warning" selected>In Progress</option>
+                    <option class="bg-success">Done</option>
+                    <option class="bg-light">To do</option>
+                    <option class="bg-danger">To review</option>
+                  </select>
+                </div>
+                <div class="row"></div>
+                <div class="col-5">
+                  <h6>Assign to:</h6>
+                </div>
+                <div class="col-4">
+                  <h6>Due date:</h6>
+                </div>
+                <div class="col-3">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#descModal"
+                  >
+                    View description
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-warning m-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editTaskModal"
+                  >
+                    Edit Task
+                  </button>
+                  <button class="btn btn-danger" type="button">Delete</button>
+                </div>
               </div>
             </div>
           </div>
+          <!-- end of Individual task -->
+          <!-- 2nd Individual task -->
+          <div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-9">
+                  <h5>Task Name</h5>
+                </div>
+                <div class="col-3">
+                  <select class="status">
+                    <option class="bg-warning">In Progress</option>
+                    <option class="bg-success">Done</option>
+                    <option class="bg-light">To do</option>
+                    <option class="bg-danger">To review</option>
+                  </select>
+                </div>
+                <div class="row"></div>
+                <div class="col-5">
+                  <h6>Assign to:</h6>
+                </div>
+                <div class="col-4">
+                  <h6>Due date:</h6>
+                </div>
+                <div class="col-3">
+                  <!-- Button trigger modal -->
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#descModal"
+                  >
+                    View description
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-warning m-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editTaskModal"
+                  >
+                    Edit Task
+                  </button>
+                  <button class="btn btn-danger" type="button">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end of 2nd Individual task -->
+          <!-- 3rd Individual task -->
+          <div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-9">
+                  <h5>Task Name</h5>
+                </div>
+                <div class="col-3">
+                  <select class="status">
+                    <option class="bg-warning">In Progress</option>
+                    <option class="bg-success">Done</option>
+                    <option class="bg-light">To do</option>
+                    <option class="bg-danger">To review</option>
+                  </select>
+                </div>
+                <div class="row"></div>
+                <div class="col-5">
+                  <h6>Assign to:</h6>
+                </div>
+                <div class="col-4">
+                  <h6>Due date:</h6>
+                </div>
+                <div class="col-3">
+                  <!-- Button trigger modal -->
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#descModal"
+                  >
+                    View description
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-warning m-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editTaskModal"
+                  >
+                    Edit Task
+                  </button>
+                  <button class="btn btn-danger" type="button">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end of 3rd Individual task -->
+          <!-- 4th Individual task -->
+          <div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-9">
+                  <h5>Task Name</h5>
+                </div>
+                <div class="col-3">
+                  <select class="status">
+                    <option class="bg-warning">In Progress</option>
+                    <option class="bg-success">Done</option>
+                    <option class="bg-light">To do</option>
+                    <option class="bg-danger">To review</option>
+                  </select>
+                </div>
+                <div class="row"></div>
+                <div class="col-5">
+                  <h6>Assign to:</h6>
+                </div>
+                <div class="col-4">
+                  <h6>Due date:</h6>
+                </div>
+                <div class="col-3">
+                  <!-- Button trigger modal -->
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#descModal"
+                  >
+                    View description
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-warning m-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editTaskModal"
+                  >
+                    Edit Task
+                  </button>
+                  <button class="btn btn-danger" type="button">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end of 4th Individual task -->
+          <!-- 5th Individual task -->
+          <div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-9">
+                  <h5>Task Name</h5>
+                </div>
+                <div class="col-3">
+                  <select class="status">
+                    <option class="bg-warning">In Progress</option>
+                    <option class="bg-success">Done</option>
+                    <option class="bg-light">To do</option>
+                    <option class="bg-danger">To review</option>
+                  </select>
+                </div>
+                <div class="row"></div>
+                <div class="col-5">
+                  <h6>Assign to:</h6>
+                </div>
+                <div class="col-4">
+                  <h6>Due date:</h6>
+                </div>
+                <div class="col-3">
+                  <!-- Button trigger modal -->
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#descModal"
+                  >
+                    View description
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-warning m-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editTaskModal"
+                  >
+                    Edit Task
+                  </button>
+                  <button class="btn btn-danger" type="button">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end of 5th Individual task -->
         </div>
       </section>
-      <!-- end of 2nd Individual task -->
-      <!-- 3rd Individual task -->
-      <div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-9">
-              <h5>Task Name</h5>
-            </div>
-            <div class="col-3">
-              <select class="status">
-                <option class="bg-warning">In Progress</option>
-                <option class="bg-success">Done</option>
-                <option class="bg-light">To do</option>
-                <option class="bg-danger">To review</option>
-              </select>
-            </div>
-            <div class="row"></div>
-            <div class="col-5">
-              <h6>Assign to:</h6>
-            </div>
-            <div class="col-4">
-              <h6>Due date:</h6>
-            </div>
-            <div class="col-3">
-              <!-- Button trigger modal -->
-              <button class="btn btn-primary m-2" type="button">
-                Delete
-              </button>
-              <button
-                type="button"
-                class="btn btn-primary"
-                data-bs-toggle="modal"
-                data-bs-target="#descModal"
-              >
-                View description
-              </button>
 
-              <button
-                type="button"
-                class="btn btn-primary m-2"
-                data-bs-toggle="modal"
-                data-bs-target="#editTaskModal"
-              >
-                Edit Task
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- end of 3rd Individual task -->
-    <!-- 4th Individual task -->
-    <div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-9">
-            <h5>Task Name</h5>
-          </div>
-          <div class="col-3">
-            <select class="status">
-              <option class="bg-warning">In Progress</option>
-              <option class="bg-success">Done</option>
-              <option class="bg-light">To do</option>
-              <option class="bg-danger">To review</option>
-            </select>
-          </div>
-          <div class="row"></div>
-          <div class="col-5">
-            <h6>Assign to:</h6>
-          </div>
-          <div class="col-4">
-            <h6>Due date:</h6>
-          </div>
-          <div class="col-3">
-            <!-- Button trigger modal -->
-            <button class="btn btn-primary m-2" type="button">
-              Delete
-            </button>
-            <button
-              type="button"
-              class="btn btn-primary"
-              data-bs-toggle="modal"
-              data-bs-target="#descModal"
-            >
-              View description
-            </button>
-
-            <button
-              type="button"
-              class="btn btn-primary m-2"
-              data-bs-toggle="modal"
-              data-bs-target="#editTaskModal"
-            >
-              Edit Task
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- end of 4th Individual task -->
-  <!-- 5th Individual task -->
-  <div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
-    <div class="card-body">
-      <div class="row">
-        <div class="col-9">
-          <h5>Task Name</h5>
-        </div>
-        <div class="col-3">
-          <select class="status">
-            <option class="bg-warning">In Progress</option>
-            <option class="bg-success">Done</option>
-            <option class="bg-light">To do</option>
-            <option class="bg-danger">To review</option>
-          </select>
-        </div>
-        <div class="row"></div>
-        <div class="col-5">
-          <h6>Assign to:</h6>
-        </div>
-        <div class="col-4">
-          <h6>Due date:</h6>
-        </div>
-        <div class="col-3">
-          <!-- Button trigger modal -->
-          <button class="btn btn-primary m-2" type="button">
-            Delete
-          </button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            data-bs-toggle="modal"
-            data-bs-target="#descModal"
-          >
-            View description
-          </button>
-
-          <button
-            type="button"
-            class="btn btn-primary m-2"
-            data-bs-toggle="modal"
-            data-bs-target="#editTaskModal"
-          >
-            Edit Task
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- end of 5th Individual task -->
       <!-- Review -->
       <section class="list-group">
-        <div class="card to-review-heading">
+        <div
+          role="button"
+          class="card to-review-heading"
+          data-bs-toggle="collapse"
+          data-bs-target="#to-review"
+        >
           <div class="card-body">
             <h4>To Review tasks</h4>
           </div>
         </div>
-        <!-- 1nd Individual task -->
-        <div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-9">
-                <h5>Task Name</h5>
-              </div>
-              <div class="col-3">
-                <select class="status">
-                  <option class="bg-warning">In Progress</option>
-                  <option class="bg-success">Done</option>
-                  <option class="bg-light">To do</option>
-                  <option class="bg-danger">To review</option>
-                </select>
-              </div>
-              <div class="row"></div>
-              <div class="col-5">
-                <h6>Assign to:</h6>
-              </div>
-              <div class="col-4">
-                <h6>Due date:</h6>
-              </div>
-              <div class="col-3">
-                <button class="btn btn-primary m-2" type="button">
-                  Delete
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#descModal"
-                >
-                  View description
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary m-2"
-                  data-bs-toggle="modal"
-                  data-bs-target="#editTaskModal"
-                >
-                  Edit Task
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- end of 1nd Individual task -->
-        <!-- 2nd Individual task -->
-        <div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-9">
-                <h5>Task Name</h5>
-              </div>
-              <div class="col-3">
-                <select class="status">
-                  <option class="bg-warning">In Progress</option>
-                  <option class="bg-success">Done</option>
-                  <option class="bg-light">To do</option>
-                  <option class="bg-danger">To review</option>
-                </select>
-              </div>
-              <div class="row"></div>
-              <div class="col-5">
-                <h6>Assign to:</h6>
-              </div>
-              <div class="col-4">
-                <h6>Due date:</h6>
-              </div>
-              <div class="col-3">
-                <button class="btn btn-primary m-2" type="button">
-                  Delete
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#descModal"
-                >
-                  View description
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary m-2"
-                  data-bs-toggle="modal"
-                  data-bs-target="#editTaskModal"
-                >
-                  Edit Task
-                </button>
+        <div id="to-review" class="tasks-container collapse">
+          <!-- 1nd Individual task -->
+          <div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-9">
+                  <h5>Task Name</h5>
+                </div>
+                <div class="col-3">
+                  <select class="status">
+                    <option class="bg-warning">In Progress</option>
+                    <option class="bg-success">Done</option>
+                    <option class="bg-light">To do</option>
+                    <option class="bg-danger">To review</option>
+                  </select>
+                </div>
+                <div class="row"></div>
+                <div class="col-5">
+                  <h6>Assign to:</h6>
+                </div>
+                <div class="col-4">
+                  <h6>Due date:</h6>
+                </div>
+                <div class="col-3">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#descModal"
+                  >
+                    View description
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-warning m-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editTaskModal"
+                  >
+                    Edit Task
+                  </button>
+                  <button class="btn btn-danger" type="button">Delete</button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <!-- end of 2nd Individual task -->
-        <!-- 3rd Individual task -->
-        <div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-9">
-                <h5>Task Name</h5>
-              </div>
-              <div class="col-3">
-                <select class="status">
-                  <option class="bg-warning">In Progress</option>
-                  <option class="bg-success">Done</option>
-                  <option class="bg-light">To do</option>
-                  <option class="bg-danger">To review</option>
-                </select>
-              </div>
-              <div class="row"></div>
-              <div class="col-5">
-                <h6>Assign to:</h6>
-              </div>
-              <div class="col-4">
-                <h6>Due date:</h6>
-              </div>
-              <div class="col-3">
-                <button class="btn btn-primary m-2" type="button">
-                  Delete
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#descModal"
-                >
-                  View description
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary m-2"
-                  data-bs-toggle="modal"
-                  data-bs-target="#editTaskModal"
-                >
-                  Edit Task
-                </button>
+          <!-- end of 1nd Individual task -->
+          <!-- 2nd Individual task -->
+          <div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-9">
+                  <h5>Task Name</h5>
+                </div>
+                <div class="col-3">
+                  <select class="status">
+                    <option class="bg-warning">In Progress</option>
+                    <option class="bg-success">Done</option>
+                    <option class="bg-light">To do</option>
+                    <option class="bg-danger">To review</option>
+                  </select>
+                </div>
+                <div class="row"></div>
+                <div class="col-5">
+                  <h6>Assign to:</h6>
+                </div>
+                <div class="col-4">
+                  <h6>Due date:</h6>
+                </div>
+                <div class="col-3">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#descModal"
+                  >
+                    View description
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-warning m-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editTaskModal"
+                  >
+                    Edit Task
+                  </button>
+                  <button class="btn btn-danger" type="button">Delete</button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <!-- end of 3rd Individual task -->
-        <!-- 4th Individual task -->
-        <div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-9">
-                <h5>Task Name</h5>
-              </div>
-              <div class="col-3">
-                <select class="status">
-                  <option class="bg-warning">In Progress</option>
-                  <option class="bg-success">Done</option>
-                  <option class="bg-light">To do</option>
-                  <option class="bg-danger">To review</option>
-                </select>
-              </div>
-              <div class="row"></div>
-              <div class="col-5">
-                <h6>Assign to:</h6>
-              </div>
-              <div class="col-4">
-                <h6>Due date:</h6>
-              </div>
-              <div class="col-3">
-                <button class="btn btn-primary m-2" type="button">
-                  Delete
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#descModal"
-                >
-                  View description
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary m-2"
-                  data-bs-toggle="modal"
-                  data-bs-target="#editTaskModal"
-                >
-                  Edit Task
-                </button>
+          <!-- end of 2nd Individual task -->
+          <!-- 3rd Individual task -->
+          <div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-9">
+                  <h5>Task Name</h5>
+                </div>
+                <div class="col-3">
+                  <select class="status">
+                    <option class="bg-warning">In Progress</option>
+                    <option class="bg-success">Done</option>
+                    <option class="bg-light">To do</option>
+                    <option class="bg-danger">To review</option>
+                  </select>
+                </div>
+                <div class="row"></div>
+                <div class="col-5">
+                  <h6>Assign to:</h6>
+                </div>
+                <div class="col-4">
+                  <h6>Due date:</h6>
+                </div>
+                <div class="col-3">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#descModal"
+                  >
+                    View description
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-warning m-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editTaskModal"
+                  >
+                    Edit Task
+                  </button>
+                  <button class="btn btn-danger" type="button">Delete</button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <!-- end of 4th Individual task -->
-        <!-- 5th Individual task -->
-        <div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-9">
-                <h5>Task Name</h5>
-              </div>
-              <div class="col-3">
-                <select class="status">
-                  <option class="bg-warning">In Progress</option>
-                  <option class="bg-success">Done</option>
-                  <option class="bg-light">To do</option>
-                  <option class="bg-danger">To review</option>
-                </select>
-              </div>
-              <div class="row"></div>
-              <div class="col-5">
-                <h6>Assign to:</h6>
-              </div>
-              <div class="col-4">
-                <h6>Due date:</h6>
-              </div>
-              <div class="col-3">
-                <button class="btn btn-primary m-2" type="button">
-                  Delete
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#descModal"
-                >
-                  View description
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary m-2"
-                  data-bs-toggle="modal"
-                  data-bs-target="#editTaskModal"
-                >
-                  Edit Task
-                </button>
+          <!-- end of 3rd Individual task -->
+          <!-- 4th Individual task -->
+          <div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-9">
+                  <h5>Task Name</h5>
+                </div>
+                <div class="col-3">
+                  <select class="status">
+                    <option class="bg-warning">In Progress</option>
+                    <option class="bg-success">Done</option>
+                    <option class="bg-light">To do</option>
+                    <option class="bg-danger">To review</option>
+                  </select>
+                </div>
+                <div class="row"></div>
+                <div class="col-5">
+                  <h6>Assign to:</h6>
+                </div>
+                <div class="col-4">
+                  <h6>Due date:</h6>
+                </div>
+                <div class="col-3">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#descModal"
+                  >
+                    View description
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-warning m-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editTaskModal"
+                  >
+                    Edit Task
+                  </button>
+                  <button class="btn btn-danger" type="button">Delete</button>
+                </div>
               </div>
             </div>
           </div>
+          <!-- end of 4th Individual task -->
+          <!-- 5th Individual task -->
+          <div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-9">
+                  <h5>Task Name</h5>
+                </div>
+                <div class="col-3">
+                  <select class="status">
+                    <option class="bg-warning">In Progress</option>
+                    <option class="bg-success">Done</option>
+                    <option class="bg-light">To do</option>
+                    <option class="bg-danger">To review</option>
+                  </select>
+                </div>
+                <div class="row"></div>
+                <div class="col-5">
+                  <h6>Assign to:</h6>
+                </div>
+                <div class="col-4">
+                  <h6>Due date:</h6>
+                </div>
+                <div class="col-3">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#descModal"
+                  >
+                    View description
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-warning m-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editTaskModal"
+                  >
+                    Edit Task
+                  </button>
+                  <button class="btn btn-danger" type="button">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end of 5th Individual task -->
         </div>
-        <!-- end of 5th Individual task -->
       </section>
       <section class="list-group">
         <!-- Completed task -->
-        <div class="card completed-heading">
+        <div
+          role="button"
+          class="card completed-heading"
+          data-bs-toggle="collapse"
+          data-bs-target="#completed"
+        >
           <div class="card-body">
             <h4>Completed tasks</h4>
           </div>
         </div>
-        <!-- 1st Individual task -->
-        <div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-9">
-                <h5>Task Name</h5>
-              </div>
-              <div class="col-3">
-                <select class="status">
-                  <option class="bg-warning">In Progress</option>
-                  <option class="bg-success">Done</option>
-                  <option class="bg-light">To do</option>
-                  <option class="bg-danger">To review</option>
-                </select>
-              </div>
-              <div class="row"></div>
-              <div class="col-5">
-                <h6>Assign to:</h6>
-              </div>
-              <div class="col-4">
-                <h6>Due date:</h6>
-              </div>
-              <div class="col-3">
-                <button class="btn btn-primary m-2" type="button">
-                  Delete
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#descModal"
-                >
-                  View description
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary m-2"
-                  data-bs-toggle="modal"
-                  data-bs-target="#editTaskModal"
-                >
-                  Edit Task
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- end of 1st Individual task -->
-        <!-- 2nd Individual task -->
-        <div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-9">
-                <h5>Task Name</h5>
-              </div>
-              <div class="col-3">
-                <select class="status">
-                  <option class="bg-warning">In Progress</option>
-                  <option class="bg-success">Done</option>
-                  <option class="bg-light">To do</option>
-                  <option class="bg-danger">To review</option>
-                </select>
-              </div>
-              <div class="row"></div>
-              <div class="col-5">
-                <h6>Assign to:</h6>
-              </div>
-              <div class="col-4">
-                <h6>Due date:</h6>
-              </div>
-              <div class="col-3">
-                <button class="btn btn-primary m-2" type="button">
-                  Delete
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#descModal"
-                >
-                  View description
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary m-2"
-                  data-bs-toggle="modal"
-                  data-bs-target="#editTaskModal"
-                >
-                  Edit Task
-                </button>
+        <div id="completed" class="tasks-container collapse">
+          <!-- 1st Individual task -->
+          <div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-9">
+                  <h5>Task Name</h5>
+                </div>
+                <div class="col-3">
+                  <select class="status">
+                    <option class="bg-warning">In Progress</option>
+                    <option class="bg-success">Done</option>
+                    <option class="bg-light">To do</option>
+                    <option class="bg-danger">To review</option>
+                  </select>
+                </div>
+                <div class="row"></div>
+                <div class="col-5">
+                  <h6>Assign to:</h6>
+                </div>
+                <div class="col-4">
+                  <h6>Due date:</h6>
+                </div>
+                <div class="col-3">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#descModal"
+                  >
+                    View description
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-warning m-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editTaskModal"
+                  >
+                    Edit Task
+                  </button>
+                  <button class="btn btn-danger" type="button">Delete</button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <!-- end of 2nd Individual task -->
-        <!-- 3rd Individual task -->
-        <div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-9">
-                <h5>Task Name</h5>
-              </div>
-              <div class="col-3">
-                <select class="status">
-                  <option class="bg-warning">In Progress</option>
-                  <option class="bg-success">Done</option>
-                  <option class="bg-light">To do</option>
-                  <option class="bg-danger">To review</option>
-                </select>
-              </div>
-              <div class="row"></div>
-              <div class="col-5">
-                <h6>Assign to:</h6>
-              </div>
-              <div class="col-4">
-                <h6>Due date:</h6>
-              </div>
-              <div class="col-3">
-                <button class="btn btn-primary m-2" type="button">
-                  Delete
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#descModal"
-                >
-                  View description
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary m-2"
-                  data-bs-toggle="modal"
-                  data-bs-target="#editTaskModal"
-                >
-                  Edit Task
-                </button>
+          <!-- end of 1st Individual task -->
+          <!-- 2nd Individual task -->
+          <div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-9">
+                  <h5>Task Name</h5>
+                </div>
+                <div class="col-3">
+                  <select class="status">
+                    <option class="bg-warning">In Progress</option>
+                    <option class="bg-success">Done</option>
+                    <option class="bg-light">To do</option>
+                    <option class="bg-danger">To review</option>
+                  </select>
+                </div>
+                <div class="row"></div>
+                <div class="col-5">
+                  <h6>Assign to:</h6>
+                </div>
+                <div class="col-4">
+                  <h6>Due date:</h6>
+                </div>
+                <div class="col-3">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#descModal"
+                  >
+                    View description
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-warning m-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editTaskModal"
+                  >
+                    Edit Task
+                  </button>
+                  <button class="btn btn-danger" type="button">Delete</button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <!-- end of 3rd Individual task -->
-        <!-- 4th Individual task -->
-        <div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-9">
-                <h5>Task Name</h5>
-              </div>
-              <div class="col-3">
-                <select class="status">
-                  <option class="bg-warning">In Progress</option>
-                  <option class="bg-success">Done</option>
-                  <option class="bg-light">To do</option>
-                  <option class="bg-danger">To review</option>
-                </select>
-              </div>
-              <div class="row"></div>
-              <div class="col-5">
-                <h6>Assign to:</h6>
-              </div>
-              <div class="col-4">
-                <h6>Due date:</h6>
-              </div>
-              <div class="col-3">
-                <button class="btn btn-primary m-2" type="button">
-                  Delete
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#descModal"
-                >
-                  View description
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary m-2"
-                  data-bs-toggle="modal"
-                  data-bs-target="#editTaskModal"
-                >
-                  Edit Task
-                </button>
+          <!-- end of 2nd Individual task -->
+          <!-- 3rd Individual task -->
+          <div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-9">
+                  <h5>Task Name</h5>
+                </div>
+                <div class="col-3">
+                  <select class="status">
+                    <option class="bg-warning">In Progress</option>
+                    <option class="bg-success">Done</option>
+                    <option class="bg-light">To do</option>
+                    <option class="bg-danger">To review</option>
+                  </select>
+                </div>
+                <div class="row"></div>
+                <div class="col-5">
+                  <h6>Assign to:</h6>
+                </div>
+                <div class="col-4">
+                  <h6>Due date:</h6>
+                </div>
+                <div class="col-3">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#descModal"
+                  >
+                    View description
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-warning m-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editTaskModal"
+                  >
+                    Edit Task
+                  </button>
+                  <button class="btn btn-danger" type="button">Delete</button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <!-- end of 4th Individual task -->
-        <!-- 5th Individual task -->
-        <div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
-          <div class="card-body">
-            <div class="row">
-              <div class="col-9">
-                <h5>Task Name</h5>
-              </div>
-              <div class="col-3">
-                <select class="status">
-                  <option class="bg-warning">In Progress</option>
-                  <option class="bg-success">Done</option>
-                  <option class="bg-light">To do</option>
-                  <option class="bg-danger">To review</option>
-                </select>
-              </div>
-              <div class="row"></div>
-              <div class="col-5">
-                <h6>Assign to:</h6>
-              </div>
-              <div class="col-4">
-                <h6>Due date:</h6>
-              </div>
-              <div class="col-3">
-                <button class="btn btn-primary m-2" type="button">
-                  Delete
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  data-bs-toggle="modal"
-                  data-bs-target="#descModal"
-                >
-                  View description
-                </button>
-                <button
-                  type="button"
-                  class="btn btn-primary m-2"
-                  data-bs-toggle="modal"
-                  data-bs-target="#editTaskModal"
-                >
-                  Edit Task
-                </button>
+          <!-- end of 3rd Individual task -->
+          <!-- 4th Individual task -->
+          <div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-9">
+                  <h5>Task Name</h5>
+                </div>
+                <div class="col-3">
+                  <select class="status">
+                    <option class="bg-warning">In Progress</option>
+                    <option class="bg-success">Done</option>
+                    <option class="bg-light">To do</option>
+                    <option class="bg-danger">To review</option>
+                  </select>
+                </div>
+                <div class="row"></div>
+                <div class="col-5">
+                  <h6>Assign to:</h6>
+                </div>
+                <div class="col-4">
+                  <h6>Due date:</h6>
+                </div>
+                <div class="col-3">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#descModal"
+                  >
+                    View description
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-warning m-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editTaskModal"
+                  >
+                    Edit Task
+                  </button>
+                  <button class="btn btn-danger" type="button">Delete</button>
+                </div>
               </div>
             </div>
           </div>
+          <!-- end of 4th Individual task -->
+          <!-- 5th Individual task -->
+          <div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-9">
+                  <h5>Task Name</h5>
+                </div>
+                <div class="col-3">
+                  <select class="status">
+                    <option class="bg-warning">In Progress</option>
+                    <option class="bg-success">Done</option>
+                    <option class="bg-light">To do</option>
+                    <option class="bg-danger">To review</option>
+                  </select>
+                </div>
+                <div class="row"></div>
+                <div class="col-5">
+                  <h6>Assign to:</h6>
+                </div>
+                <div class="col-4">
+                  <h6>Due date:</h6>
+                </div>
+                <div class="col-3">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#descModal"
+                  >
+                    View description
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-warning m-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editTaskModal"
+                  >
+                    Edit Task
+                  </button>
+                  <button class="btn btn-danger" type="button">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end of 5th Individual task -->
         </div>
-        <!-- end of 5th Individual task -->
       </section>
     </main>
     <script

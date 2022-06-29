@@ -14,9 +14,13 @@
     border: none;
 }
 
-.ml-1 {
+/* .ml-1 {
     margin-top: ($spacer * .25) !important;
-  }
+  } */
+
+.to-do-heading {
+    background-color: rgba(191, 190, 190, 0.753);
+}
 
 .in-progress-heading {
     background-color: rgba(252, 230, 63, 0.753);
