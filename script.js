@@ -1,6 +1,5 @@
 /****************   Buttons   ****************/
 const createTaskButton = document.querySelector("#newTaskForm")
-console.log(createTaskButton)
 /****************   Input form   ****************/
 // FOR VALIDATION
 // Name
@@ -39,8 +38,6 @@ const changeCurrentDate = () => {
 }
 
 changeCurrentDate();
-
-let eachName
 
 /****************   Form validation   ****************/
 taskName.forEach(name => {
@@ -101,6 +98,7 @@ dueDate.forEach(dueDate => {
 
 /****************   Task Class/Object   ****************/
 let newTask = [];
+let insertNewTask;
 class TaskManager {
     constructor(name, description, assignedFName, assignedLName, dueDate, status) {
       this.id = newTask.length;
@@ -110,6 +108,7 @@ class TaskManager {
       this.assignedLName = assignedLName;
       this.dueDate = dueDate;
       this.status = status;
+    //   this.addTask();
     }
     getAllTasks() {
 
@@ -118,14 +117,16 @@ class TaskManager {
     getTasksWithStatus(status) {
 
     }
-    addTask(name, description, assignedFName, assignedLName, dueDate, status) {
-        newTask.push(new TaskManager (this.id, name, description, assignedFName, assignedLName, dueDate, status.value))
+    addTask() {
+        newTask.push(insertNewTask)
     }
 };
 
 let taskCard;
-let descriptionModalText;
 let todoContainer = document.querySelector('#to-do');
+let inProgressContainer = document.querySelector('#in-progress');
+let toReviewContainer = document.querySelector('#to-review');
+let completedContainer = document.querySelector('#completed');
 
 
 
@@ -134,7 +135,20 @@ createTaskButton.addEventListener("submit", e => {
     // newTask.push(new TaskManager
     //     (this.id, newTaskName.value, newDescription.value, newAssigneeFName.value, newAssigneeLName.value, newDueDate.value, newTaskStatus.options[newTaskStatus.selectedIndex].value))     
     //     console.log(newTask)
-    TaskManager.addTask(newTaskName.value, newDescription.value, newAssigneeFName.value, newAssigneeLName.value, newDueDate.value, newTaskStatus.options[newTaskStatus.selectedIndex].value)
+    // TaskManager.addTask(newTaskName.value, newDescription.value, newAssigneeFName.value, newAssigneeLName.value, newDueDate.value, newTaskStatus.options[newTaskStatus.selectedIndex].value)
+
+    let taskName = e.target.taskname.value
+    let description = e.target.description.value
+    let assigneeFirstName = e.target.assigneeFName.value
+    let assigneeLastName = e.target.assigneeLName.value
+    let dueDate = e.target.dueDate.value
+    let status = e.target.status.value
+    taskCard = ''
+    insertNewTask = new TaskManager(taskName, description, assigneeFirstName, assigneeLastName, dueDate, status)
+    insertNewTask.addTask();
+    e.target.reset()
+    
+    
 
     const createTaskHTML = () => {
         newTask.forEach(task => {
@@ -150,13 +164,13 @@ createTaskButton.addEventListener("submit", e => {
                     <select class="status">
                         <option class="bg-light" selected>To do</option>
                         <option class="bg-warning">In Progress</option>
-                        <option class="bg-success">Done</option>
                         <option class="bg-danger">To review</option>
+                        <option class="bg-success">Done</option>
                     </select>
                     </div>
                     <div class="row"></div>
                     <div class="col-5">
-                    <h6>Assign to: ${task.assignedFName + '' + task.assignedLName}</h6>
+                    <h6>Assign to: ${task.assignedFName} ${task.assignedLName}</h6>
                     </div>
                     <div class="col-4">
                     <h6>Due date: ${task.dueDate}</h6>
@@ -175,14 +189,25 @@ createTaskButton.addEventListener("submit", e => {
                 </div>
                 </div>
             </div>` 
-    });
+    })};
+    createTaskHTML();
 
     const render = () => {
+        if (status === "To do") {
+            console.log("It's to do")
+        } else if(status === "In Progress") {
+            console.log("It's in progress")
+        } else if(status === "To review") {
+            console.log("It's in review")
+        } else if(status === "Done") {
+            console.log("It's done")
+        }
         todoContainer.innerHTML = taskCard;
     }
+    render();
     
         
-}});
+});
 
 
 
