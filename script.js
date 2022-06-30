@@ -108,17 +108,21 @@ class TaskManager {
       this.assignedLName = assignedLName;
       this.dueDate = dueDate;
       this.status = status;
-    //   this.addTask();
+      this.addTask();
     }
-    getAllTasks() {
 
+    getAllTasks() {
+        console.log(localStorage.getItem("Tasks"))
     }
 
     getTasksWithStatus(status) {
+        console.log(JSON.parse(localStorage.getItem("Tasks"))) //assign variable + check if variable.status is status; return variable. 
 
     }
+    
     addTask() {
-        newTask.push(insertNewTask)
+        newTask.push(this)
+        localStorage.setItem("Tasks", JSON.stringify(newTask))
     }
 };
 
@@ -145,7 +149,9 @@ createTaskButton.addEventListener("submit", e => {
     let status = e.target.status.value
     taskCard = ''
     insertNewTask = new TaskManager(taskName, description, assigneeFirstName, assigneeLastName, dueDate, status)
-    insertNewTask.addTask();
+    // insertNewTask.addTask();
+    insertNewTask.getAllTasks();
+    insertNewTask.getTasksWithStatus();
     e.target.reset()
     
     
@@ -205,6 +211,8 @@ createTaskButton.addEventListener("submit", e => {
         todoContainer.innerHTML = taskCard;
     }
     render();
+
+    
     
         
 });
