@@ -1,9 +1,12 @@
-import { TaskManager } from './taskManager.js';
+/****************   Imports   ****************/
+import TaskManager from './taskManager.js';
+import { newTask } from './taskManager.js';
 
 /****************   Buttons   ****************/
 const createTaskButton = document.querySelector("#newTaskForm")
+
 /****************   Input form   ****************/
-// FOR VALIDATION
+/*--- FOR VALIDATION ---*/
 // Name
 let taskName = document.querySelectorAll(".taskname");
 const taskNameInvalidFeedback = document.querySelector(".taskNameInvalidFeedback");
@@ -13,17 +16,18 @@ const descnameInvalidFeedback = document.querySelector(".descnameInvalidFeedback
 // Assignee
 let assigneename  = document.querySelectorAll(".assigneename");
 const assigneenameInvalidFeedback = document.querySelector(".assigneenameInvalidFeedback");
-let assigneeLName = document.querySelectorAll(".assigneeLName");
-// TO CREATE TASK
-// Name
-let newTaskName = document.querySelector("#newTaskName")
-let newDescription = document.querySelector("#newDescription")
-let newAssigneeFName = document.querySelector("#newAssigneeFName")
-let newAssigneeLName = document.querySelector("#newAssigneeLName")
-let newDueDate = document.querySelector("#newDueDate")
-let newTaskStatus = document.querySelector("#newStatus")
 
-// TO UPDATE TASK
+/*--- CREATE TASK---*/
+let insertNewTask;
+let taskCard;
+let newTaskCard;
+let todoContainer = document.querySelector('#to-do');
+let inProgressContainer = document.querySelector('#in-progress');
+let toReviewContainer = document.querySelector('#to-review');
+let completedContainer = document.querySelector('#completed');
+
+/*--- UPDATE TASK ---*/
+
 /****************   Date   ****************/
 // Current date
 let currentDateSpan = document.querySelector("#current-date");
@@ -98,79 +102,11 @@ dueDate.forEach(dueDate => {
     });
 });
 
-/****************   Task Class/Object   ****************/
-// let newTask;
-// let tasksWithStatus = [];
-let insertNewTask;
-// class TaskManager {
-//     constructor(name, description, assignedFName, assignedLName, dueDate, status) {
-//       this.id = newTask.length;
-//       this.name = name;
-//       this.description = description;
-//       this.assignedFName = assignedFName;
-//       this.assignedLName = assignedLName;
-//       this.dueDate = dueDate;
-//       this.status = status;
-//     //   this.addTask();
-//     }
-
-//     getAllTasks() {
-//         console.log(localStorage.getItem("Tasks"))
-//     }
-
-//     getTasksWithStatus(status) {
-//         let parsedTasksObject = JSON.parse(localStorage.getItem("Tasks"))
-//         console.log(parsedTasksObject) //assign variable + check if variable.status is status; return variable. 
-//         parsedTasksObject.forEach(eachTaskObject => {
-//             console.log((eachTaskObject.status === status))
-//             if((eachTaskObject.status === status)) {
-//                 return console.log(eachTaskObject)
-//             } else {
-//                 return console.log("No Object Found")
-//             }
-            
-
-            
-//             // if(status === "To do") {
-//             //     console.log(eachTaskObject.status === "To do")
-//             //     return eachTaskObject.status === "To do"
-//             // } else if(status === "In Progress") {
-//             //     console.log(eachTaskObject.status === status)
-//             //     return eachTaskObject.status === "In Progress"
-//             // } else if(status === "To review") {
-//             //     return eachTaskObject.status === "To review"
-//             // } else if(status === "Done") {
-//             //     return eachTaskObject.status === "Done"
-//             // };
-//         });
-//     };
-
-//     addTask() {
-//         newTask.push(this)
-//         localStorage.setItem("Tasks", JSON.stringify(newTask))
-//     }
-// };
-
-let taskCard;
-// let todoStatus;
-// let inProgressStatus;
-// let toReviewStatus;
-// let completedStatus;
-let todoContainer = document.querySelector('#to-do');
-let inProgressContainer = document.querySelector('#in-progress');
-let toReviewContainer = document.querySelector('#to-review');
-let completedContainer = document.querySelector('#completed');
-// let taskStatusContainer = document.querySelector('.status-container')
-
+/****************   Create task   ****************/
 
 
 createTaskButton.addEventListener("submit", e => {
     e.preventDefault();
-    // newTask.push(new TaskManager
-    //     (this.id, newTaskName.value, newDescription.value, newAssigneeFName.value, newAssigneeLName.value, newDueDate.value, newTaskStatus.options[newTaskStatus.selectedIndex].value))     
-    //     console.log(newTask)
-    // TaskManager.addTask(newTaskName.value, newDescription.value, newAssigneeFName.value, newAssigneeLName.value, newDueDate.value, newTaskStatus.options[newTaskStatus.selectedIndex].value)
-
     let taskName = e.target.taskname.value
     let description = e.target.description.value
     let assigneeFirstName = e.target.assigneeFName.value
@@ -182,7 +118,6 @@ createTaskButton.addEventListener("submit", e => {
     insertNewTask = new TaskManager(taskName, description, assigneeFirstName, assigneeLastName, dueDate, status)
     insertNewTask.addTask();
     insertNewTask.getAllTasks();
-    // insertNewTask.getTasksWithStatus("To do");
     e.target.reset()
     
     const displayCorrectStatus = () => {
@@ -194,7 +129,6 @@ createTaskButton.addEventListener("submit", e => {
                         <option class="bg-danger">To review</option>
                         <option class="bg-success">Done</option>
             </select>` 
-            // taskStatusContainer.innerHTML = todoStatus;
         } else if(status === "In Progress") {
             return selectedOption =
             `<select class="status">
@@ -203,7 +137,6 @@ createTaskButton.addEventListener("submit", e => {
                         <option class="bg-danger">To review</option>
                         <option class="bg-success">Done</option>
             </select>`
-            // taskStatusContainer.innerHTML = inProgressStatus;
         } else if(status === "To review") {
             return selectedOption =
             `<select class="status">
@@ -212,7 +145,6 @@ createTaskButton.addEventListener("submit", e => {
                         <option class="bg-danger" selected>To review</option>
                         <option class="bg-success">Done</option>
             </select>` 
-            // taskStatusContainer.innerHTML = toReviewContainer;
         } else if(status === "Done") {
             return selectedOption =
             `<select class="status">
@@ -221,12 +153,11 @@ createTaskButton.addEventListener("submit", e => {
                         <option class="bg-danger">To review</option>
                         <option class="bg-success" selected>Done</option>
             </select>` 
-            // taskStatusContainer.innerHTML = completedContainer;
         }
         
     }
-    let newTaskCard;
-    // Create task
+    
+    // Create Task
     const createTaskHTML = () => {
         newTask.forEach(task => {
             displayCorrectStatus();
@@ -270,63 +201,26 @@ createTaskButton.addEventListener("submit", e => {
     // Display Task
     const render = () => {
         if (status === "To do") {
-            console.log(todoContainer)
             todoContainer.insertAdjacentElement("beforeend", newTaskCard);
-            // todoStatus = 
-            // `<select class="status">
-            //             <option class="bg-light" selected>To do</option>
-            //             <option class="bg-warning">In Progress</option>
-            //             <option class="bg-danger">To review</option>
-            //             <option class="bg-success">Done</option>
-            // </select>` 
-            // taskStatusContainer.innerHTML = todoStatus;
         } else if(status === "In Progress") {
             inProgressContainer.insertAdjacentElement("beforeend", newTaskCard);
-            // inProgressContainer.innerHTML = taskCard;
-            // inProgressStatus = 
-            // `<select class="status">
-            //             <option class="bg-light">To do</option>
-            //             <option class="bg-warning" selected>In Progress</option>
-            //             <option class="bg-danger">To review</option>
-            //             <option class="bg-success">Done</option>
-            // </select>`
-            // taskStatusContainer.innerHTML = inProgressStatus;
         } else if(status === "To review") {
             toReviewContainer.insertAdjacentElement("beforeend", newTaskCard);
-            // toReviewContainer.innerHTML = taskCard;
-            // toReviewContainer = 
-            // `<select class="status">
-            //             <option class="bg-light">To do</option>
-            //             <option class="bg-warning">In Progress</option>
-            //             <option class="bg-danger" selected>To review</option>
-            //             <option class="bg-success">Done</option>
-            // </select>` 
-            // taskStatusContainer.innerHTML = toReviewContainer;
         } else if(status === "Done") {
             completedContainer.insertAdjacentElement("beforeend", newTaskCard);
-            // completedContainer.innerHTML = taskCard;
-            // completedContainer = 
-            // `<select class="status">
-            //             <option class="bg-light">To do</option>
-            //             <option class="bg-warning">In Progress</option>
-            //             <option class="bg-danger">To review</option>
-            //             <option class="bg-success" selected>Done</option>
-            // </select>` 
-            // taskStatusContainer.innerHTML = completedContainer;
         }
-        
     }
-    render();
-    
-    
-    
-        
+    render();  
 });
 
 
 
 
-/****************   Display task   ****************/
-// createTaskButton.addEventListener("click", () => {
-    
-// });
+/****************   Update Task   ****************/
+
+
+
+/****************   Delete Task   ****************/
+const deleteTask = () => {
+
+};
