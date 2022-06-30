@@ -1,5 +1,6 @@
 /****************   Buttons   ****************/
-const createTaskButton = document.querySelector("#create-task")
+const createTaskButton = document.querySelector("#newTaskForm")
+console.log(createTaskButton)
 /****************   Input form   ****************/
 // FOR VALIDATION
 // Name
@@ -102,7 +103,7 @@ dueDate.forEach(dueDate => {
 let newTask = [];
 class TaskManager {
     constructor(name, description, assignedFName, assignedLName, dueDate, status) {
-      this.id = 0;
+      this.id = newTask.length;
       this.name = name;
       this.description = description;
       this.assignedFName = assignedFName;
@@ -118,7 +119,7 @@ class TaskManager {
 
     }
     addTask(name, description, assignedFName, assignedLName, dueDate, status) {
-        newTask.push(new TaskManager (this.id++, name, description, assignedFName, assignedLName, dueDate, status.value))
+        newTask.push(new TaskManager (this.id, name, description, assignedFName, assignedLName, dueDate, status.value))
     }
 };
 
@@ -128,52 +129,61 @@ let todoContainer = document.querySelector('#to-do');
 
 
 
-createTaskButton.addEventListener("click", e => {
+createTaskButton.addEventListener("submit", e => {
     e.preventDefault();
     // newTask.push(new TaskManager
     //     (this.id, newTaskName.value, newDescription.value, newAssigneeFName.value, newAssigneeLName.value, newDueDate.value, newTaskStatus.options[newTaskStatus.selectedIndex].value))     
     //     console.log(newTask)
-    newTask.forEach(task => {
-        taskCard += 
-        `<div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
-            <div class="card-body">
-            <div class="row">
-                <div class="col-9">
-                <h5>${task.name}</h5>
-                <p>${task.description}</p>
+    TaskManager.addTask(newTaskName.value, newDescription.value, newAssigneeFName.value, newAssigneeLName.value, newDueDate.value, newTaskStatus.options[newTaskStatus.selectedIndex].value)
+
+    const createTaskHTML = () => {
+        newTask.forEach(task => {
+            taskCard += 
+            `<div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
+                <div class="card-body">
+                <div class="row">
+                    <div class="col-9">
+                    <h5>${task.name}</h5>
+                    <p>${task.description}</p>
+                    </div>
+                    <div class="col-3">
+                    <select class="status">
+                        <option class="bg-light" selected>To do</option>
+                        <option class="bg-warning">In Progress</option>
+                        <option class="bg-success">Done</option>
+                        <option class="bg-danger">To review</option>
+                    </select>
+                    </div>
+                    <div class="row"></div>
+                    <div class="col-5">
+                    <h6>Assign to: ${task.assignedFName + '' + task.assignedLName}</h6>
+                    </div>
+                    <div class="col-4">
+                    <h6>Due date: ${task.dueDate}</h6>
+                    </div>
+                    <div class="col-3">
+                    <button
+                        type="button"
+                        class="btn btn-warning m-2"
+                        data-bs-toggle="modal"
+                        data-bs-target="#editTaskModal"
+                    >
+                        Edit Task
+                    </button>
+                    <button class="btn btn-danger" type="button">Delete</button>
+                    </div>
                 </div>
-                <div class="col-3">
-                <select class="status">
-                    <option class="bg-light" selected>To do</option>
-                    <option class="bg-warning">In Progress</option>
-                    <option class="bg-success">Done</option>
-                    <option class="bg-danger">To review</option>
-                </select>
                 </div>
-                <div class="row"></div>
-                <div class="col-5">
-                <h6>Assign to: ${task.assignedFName + '' + task.assignedLName}</h6>
-                </div>
-                <div class="col-4">
-                <h6>Due date: ${task.dueDate}</h6>
-                </div>
-                <div class="col-3">
-                <button
-                    type="button"
-                    class="btn btn-warning m-2"
-                    data-bs-toggle="modal"
-                    data-bs-target="#editTaskModal"
-                >
-                    Edit Task
-                </button>
-                <button class="btn btn-danger" type="button">Delete</button>
-                </div>
-            </div>
-            </div>
-        </div>` 
+            </div>` 
+    });
+
+    const render = () => {
         todoContainer.innerHTML = taskCard;
-    })
-})
+    }
+    
+        
+}});
+
 
 
 /****************   Display task   ****************/
