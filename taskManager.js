@@ -1,5 +1,6 @@
 /****************   Task Class/Object   ****************/
 export const newTask = [];
+export const parsedTasksObject = JSON.parse(localStorage.getItem("Tasks")) 
 export default class TaskManager {
     constructor(name, description, assignedFName, assignedLName, dueDate, status) {
         this.id = newTask.length;
@@ -16,15 +17,18 @@ export default class TaskManager {
     }
 
     getTasksWithStatus(status) {
-        let parsedTasksObject = JSON.parse(localStorage.getItem("Tasks")) 
+        console.log(parsedTasksObject)
         parsedTasksObject.forEach(eachTaskObject => {
-            console.log((eachTaskObject.status === status))
             if((eachTaskObject.status === status)) {
                 return eachTaskObject
             } else {
                 return "No Object Found"
             }
         })
+    }
+
+    getTaskWithId(id) {
+
     }
 
     addTask() {

@@ -416,8 +416,8 @@
             <div class="card-body">
             <div class="row">
                 <div class="col-9">
-                <h5>Task name</h5>
-                <p>Description</p>
+                  <h5>Task name</h5>
+                  <p>Description</p>
                 </div>
                 <div class="col-3 status-container">
                   <select class="status">
@@ -425,9 +425,11 @@
                     <option class="bg-warning">In Progress</option>
                     <option class="bg-danger">To review</option>
                     <option class="bg-success">Done</option>
-                </select>
+                  </select>
+                  <button type="button" class="btn btn-success mark-done">Mark as done</button>
                 </div>
-                <div class="row"></div>
+              </div>
+                <div class="row">
                 <div class="col-5">
                 <h6>Assign to: </h6>
                 </div>
@@ -445,7 +447,8 @@
                 </button>
                 <button class="btn btn-danger" type="button">Delete</button>
                 </div>
-            </div>
+              </div>
+            
             </div>
           </div>
           <!-- end of Individual task -->
@@ -1200,6 +1203,7 @@
       integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
       crossorigin="anonymous"
     ></script>
+    <script src="./jquery-3.6.0.min.js"></script>
     <script type="module" src="./script.js"></script>
   </body>
 </html>

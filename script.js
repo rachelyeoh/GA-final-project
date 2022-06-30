@@ -1,6 +1,7 @@
 /****************   Imports   ****************/
 import TaskManager from './taskManager.js';
 import { newTask } from './taskManager.js';
+import { parsedTasksObject } from './taskManager.js';
 
 /****************   Buttons   ****************/
 const createTaskButton = document.querySelector("#newTaskForm")
@@ -37,6 +38,7 @@ let todayDatePrimitive = todayDate[Symbol.toPrimitive]('number');
 // Due date
 let dueDate = document.querySelectorAll(".duedate");
 const dueDateError = document.querySelector(".dueDateError")
+
 
 /****************   Display current date   ****************/
 const changeCurrentDate = () => {
@@ -104,6 +106,8 @@ dueDate.forEach(dueDate => {
 
 /****************   Create task   ****************/
 
+// const markDoneParent = document.querySelector(".status-container")
+// let markDoneButton = document.createElement("button");
 
 createTaskButton.addEventListener("submit", e => {
     e.preventDefault();
@@ -115,9 +119,13 @@ createTaskButton.addEventListener("submit", e => {
     let status = e.target.status.value
     let selectedOption
     taskCard = ''
+    // Create new instance
     insertNewTask = new TaskManager(taskName, description, assigneeFirstName, assigneeLastName, dueDate, status)
+    // Call methods within TaskManager class
     insertNewTask.addTask();
     insertNewTask.getAllTasks();
+    insertNewTask.getTasksWithStatus("To do")
+    // Clear form
     e.target.reset()
     
     const displayCorrectStatus = () => {
@@ -157,6 +165,13 @@ createTaskButton.addEventListener("submit", e => {
         
     }
     
+    // const createMarkDoneButton = () => {
+    //     markDoneButton.classList.add("mark-done", "btn", "btn-success")
+    //     markDoneButton.setAttribute("type", "button")
+    //     markDoneButton.innerText = "Mark as done";
+    //     markDoneParent.insertAdjacentElement("beforeend", markDoneButton);
+    // }
+
     // Create Task
     const createTaskHTML = () => {
         newTask.forEach(task => {
@@ -171,7 +186,8 @@ createTaskButton.addEventListener("submit", e => {
                     <p>${task.description}</p>
                     </div>
                     <div class="col-3 status-container">
-                    ${selectedOption}
+                        ${selectedOption}
+                        <button type="button" class="btn btn-success mark-done">Mark as done</button>
                     </div>
                     <div class="row"></div>
                     <div class="col-5">
@@ -194,12 +210,13 @@ createTaskButton.addEventListener("submit", e => {
                 </div>
                 </div>
             </div>` 
-            newTaskCard.innerHTML = taskCard
+        newTaskCard.innerHTML = taskCard
     })};
     createTaskHTML();
 
     // Display Task
     const render = () => {
+
         if (status === "To do") {
             todoContainer.insertAdjacentElement("beforeend", newTaskCard);
         } else if(status === "In Progress") {
@@ -215,9 +232,38 @@ createTaskButton.addEventListener("submit", e => {
 
 
 
+/****************   Mark as Done button   ****************/
+// const markDoneParent = document.querySelector(".status-container")
+// const markDoneButton = document.createElement("button")
+// markDoneButton.classList.add("mark-done", "btn", "btn-success")
+// markDoneParent.insertAdjacentElement("beforeend", markDoneButton)
+// console.log(markDoneParent)
 
-/****************   Update Task   ****************/
+// let markDone = document.querySelector(".mark-done")
 
+// const updateTask = (button) => {
+//     console.log(button)
+// }
+
+// const updateTask = (button) => {
+//     console.log(button)
+// }
+// console.log(markDoneParent)
+// markDoneParent.addEventListener('click', (e) => {
+//     if (e.target.classList.contains('mark-done')) {
+//         console.log("It's working");
+//     }
+//   });
+
+// let markDone = document.querySelector("#mark-done")
+// markDoneButton.addEventListener("click", () => {
+//     // newTask.bind(this)
+//     console.log("It's working hereeee")
+// })
+
+$(document).on('click', '.mark-done', (e) => {
+    console.log(e.target)
+})
 
 
 /****************   Delete Task   ****************/
