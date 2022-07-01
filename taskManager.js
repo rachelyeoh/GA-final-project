@@ -1,6 +1,5 @@
 /****************   Task Class/Object   ****************/
-export const newTask = [];
-export const parsedTasksObject = JSON.parse(localStorage.getItem("Tasks")) 
+export let newTask = [];
 export default class TaskManager {
     constructor(name, description, assignedFName, assignedLName, dueDate, status) {
         this.id = newTask.length;
@@ -10,6 +9,7 @@ export default class TaskManager {
         this.assignedLName = assignedLName;
         this.dueDate = dueDate;
         this.status = status;
+        this.parsedTasksObject = JSON.parse(localStorage.getItem("Tasks"))
         // this.newTask = []
     }
 
@@ -18,8 +18,8 @@ export default class TaskManager {
     }
 
     getTasksWithStatus(status) {
-        console.log(parsedTasksObject)
-        parsedTasksObject.forEach(eachTaskObject => {
+        // const parsedTasksObject = JSON.parse(localStorage.getItem("Tasks"))
+        this.parsedTasksObject.forEach(eachTaskObject => {
             if((eachTaskObject.status === status)) {
                 return eachTaskObject
             } else {
@@ -28,12 +28,23 @@ export default class TaskManager {
         })
     }
 
-    getTaskWithId(id) {
-
-    }
-
     addTask() {
         newTask.push(this)
         localStorage.setItem("Tasks", JSON.stringify(newTask))
+    }
+
+    setDoneStatus(task) {
+        task.status = "Done"
+    }
+
+    deleteTask(task) {
+        console.log(newTask)
+        // NEED TO FIX THIS ARRAY NOT WORKING
+        const taskBefore = [...newTask.slice(task - 1, task)]
+        console.log(taskBefore)
+        const taskAfter = [...newTask.slice(task + 1, task + 2)]
+        console.log(taskAfter)
+        newTask = [...taskBefore, ...taskAfter]
+        console.log(newTask)
     }
 };

@@ -1,7 +1,6 @@
 /****************   Imports   ****************/
 import TaskManager from './taskManager.js';
 import { newTask } from './taskManager.js';
-// import { parsedTasksObject } from './taskManager.js';
 
 /****************   Buttons   ****************/
 const newTaskForm = document.querySelector("#newTaskForm")
@@ -29,8 +28,6 @@ let inProgressContainer = document.querySelector('#in-progress');
 let toReviewContainer = document.querySelector('#to-review');
 let completedContainer = document.querySelector('#completed');
 
-/*--- UPDATE TASK ---*/
-
 /****************   Date   ****************/
 // Current date
 let currentDateSpan = document.querySelector("#current-date");
@@ -49,13 +46,11 @@ const changeCurrentDate = () => {
 
 changeCurrentDate();
 
-
+// localStorage.clear()
 /****************   Form validation   ****************/
 const isInvalid = (element) => {
     if(element.classList.contains("is-invalid")) {
-        console.log(element)
-            createTaskButton.setAttribute("disabled", "");
-            console.log(createTaskButton)
+        createTaskButton.setAttribute("disabled", "");
     } else {
         createTaskButton.removeAttribute("disabled", "");
     }
@@ -121,7 +116,6 @@ dueDate.forEach(dueDate => {
     });
 });
 
-
 /****************   Create task   ****************/
 newTaskForm.addEventListener("submit", e => {
     e.preventDefault();
@@ -137,8 +131,9 @@ newTaskForm.addEventListener("submit", e => {
     insertNewTask = new TaskManager(taskName, description, assigneeFirstName, assigneeLastName, dueDate, status)
     // Call methods within TaskManager class
     insertNewTask.addTask();
-    insertNewTask.getAllTasks();
-    insertNewTask.getTasksWithStatus("To do")
+    // insertNewTask.getAllTasks();
+    // insertNewTask.getTasksWithStatus("To do")
+    
     // Clear form
     e.target.reset()
     
@@ -185,7 +180,7 @@ newTaskForm.addEventListener("submit", e => {
             displayCorrectStatus();
             newTaskCard = document.createElement("div");
             taskCard = 
-            `<div class="card shadow p-3 mb-2 bg-body rounded list-group-item">
+            `<div data-id=${task.id} class="card shadow p-3 mb-2 bg-body rounded list-group-item">
                 <div class="card-body">
                 <div class="row">
                     <div class="col-9">
@@ -212,7 +207,7 @@ newTaskForm.addEventListener("submit", e => {
                     >
                         Edit Task
                     </button>
-                    <button class="btn btn-danger" type="button">Delete</button>
+                    <button class="btn btn-danger delete-btn" type="button">Delete</button>
                     </div>
                 </div>
                 </div>
@@ -223,7 +218,6 @@ newTaskForm.addEventListener("submit", e => {
 
     // Display Task
     const render = () => {
-
         if (status === "To do") {
             todoContainer.insertAdjacentElement("beforeend", newTaskCard);
         } else if(status === "In Progress") {
@@ -239,50 +233,32 @@ newTaskForm.addEventListener("submit", e => {
 
 
 
-/****************   Mark as Done button   ****************/
-// const markDoneParent = document.querySelector(".status-container")
-// const markDoneButton = document.createElement("button")
-// markDoneButton.classList.add("mark-done", "btn", "btn-success")
-// markDoneParent.insertAdjacentElement("beforeend", markDoneButton)
-// console.log(markDoneParent)
-
-// let markDone = document.querySelector(".mark-done")
-
-// const updateTask = (button) => {
-//     console.log(button)
-// }
-
-// const updateTask = (button) => {
-//     console.log(button)
-// }
-// console.log(markDoneParent)
-// markDoneParent.addEventListener('click', (e) => {
-//     if (e.target.classList.contains('mark-done')) {
-//         console.log("It's working");
-//     }
-//   });
-
-// let markDone = document.querySelector("#mark-done")
-// markDoneButton.addEventListener("click", () => {
-//     // newTask.bind(this)
-//     console.log("It's working hereeee")
-// })
-// let markDoneButton = document.querySelectorAll(".mark-done");
-
-// markDoneButton.forEach(button => {
-//     button.addEventListener("click", () => {
-//         console.log("I'm here")
-//         console.log(markDoneButton)
-//     })
-// })
-
-
+/****************   Update Tasks / Mark as Done button   ****************/
 $(document).on('click', '.mark-done', (e) => {
-    console.log(e.target)
+    // Select task wrapper variable
+    const taskWrapper = e.target.parentElement.parentElement.parentElement.parentElement
+    // Get id of the selected task
+    const taskId = taskWrapper.getAttribute("data-id")
+    // Change to correct status visually in task card
+    e.target.previousElementSibling.innerHTML = 
+    `<select class="status">
+        <option class="bg-light">To do</option>
+        <option class="bg-warning">In Progress</option>
+        <option class="bg-danger">To review</option>
+        <option class="bg-success" selected>Done</option>
+    </select>`
+    // Change to correct status in newTask array (task object)
+    insertNewTask.setDoneStatus(newTask[taskId])
+    // Move to 'Completed' container
+    completedContainer.insertAdjacentElement("beforeend", e.target.parentElement.parentElement.parentElement.parentElement);
+    // Remove mark as done button
+    $( e.target ).remove();
 })
 
-
 /****************   Delete Task   ****************/
-const deleteTask = () => {
-
-};
+$(document).on('click', '.delete-btn', (e) => {
+    const taskWrapper = e.target.parentElement.parentElement.parentElement.parentElement
+    const taskId = taskWrapper.getAttribute("data-id")
+    insertNewTask.deleteTask(newTask[taskId])
+    $( taskWrapper ).remove();
+})
