@@ -1,5 +1,5 @@
 /****************   Task Class/Object   ****************/
-export let newTask = [];
+export const newTask = [];
 export default class TaskManager {
     constructor(name, description, assignedFName, assignedLName, dueDate, status) {
         this.id = newTask.length;
@@ -23,7 +23,18 @@ export default class TaskManager {
             if((eachTaskObject.status === status)) {
                 return eachTaskObject
             } else {
-                return "No Object Found"
+                return "No Task Found"
+            }
+        })
+    }
+
+    getTaskWithId(id) {
+        this.parsedTasksObject.forEach(eachTaskObject => {
+            if((eachTaskObject.id == id)) {
+                console.log(eachTaskObject)
+                return eachTaskObject
+            } else {
+                return "No Task Found"
             }
         })
     }
@@ -37,14 +48,10 @@ export default class TaskManager {
         task.status = "Done"
     }
 
-    deleteTask(task) {
-        console.log(newTask)
-        // NEED TO FIX THIS ARRAY NOT WORKING
-        const taskBefore = [...newTask.slice(task - 1, task)]
-        console.log(taskBefore)
-        const taskAfter = [...newTask.slice(task + 1, task + 2)]
-        console.log(taskAfter)
-        newTask = [...taskBefore, ...taskAfter]
+    deleteTask(taskId) {
+        // NOT WORKING, NEED TO FIX THIS
+        this.getTaskWithId(taskId)
+        newTask.splice(taskId, 1)
         console.log(newTask)
     }
 };

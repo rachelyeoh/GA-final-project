@@ -258,7 +258,10 @@ $(document).on('click', '.mark-done', (e) => {
 /****************   Delete Task   ****************/
 $(document).on('click', '.delete-btn', (e) => {
     const taskWrapper = e.target.parentElement.parentElement.parentElement.parentElement
+    // console.log(taskWrapper)
     const taskId = taskWrapper.getAttribute("data-id")
-    insertNewTask.deleteTask(newTask[taskId])
+    // insertNewTask.getTaskWithId(taskId)
+    insertNewTask.deleteTask(taskId)
+    // Remove the task card
     $( taskWrapper ).remove();
 })
