@@ -1,13 +1,15 @@
 /****************   Imports   ****************/
 import TaskManager from './taskManager.js';
 import { newTask } from './taskManager.js';
-import { parsedTasksObject } from './taskManager.js';
+// import { parsedTasksObject } from './taskManager.js';
 
 /****************   Buttons   ****************/
-const createTaskButton = document.querySelector("#newTaskForm")
+const newTaskForm = document.querySelector("#newTaskForm")
 
 /****************   Input form   ****************/
 /*--- FOR VALIDATION ---*/
+// To enable/disable button depending on validation
+const createTaskButton = document.querySelector("#create-task")
 // Name
 let taskName = document.querySelectorAll(".taskname");
 const taskNameInvalidFeedback = document.querySelector(".taskNameInvalidFeedback");
@@ -47,7 +49,18 @@ const changeCurrentDate = () => {
 
 changeCurrentDate();
 
+
 /****************   Form validation   ****************/
+const isInvalid = (element) => {
+    if(element.classList.contains("is-invalid")) {
+        console.log(element)
+            createTaskButton.setAttribute("disabled", "");
+            console.log(createTaskButton)
+    } else {
+        createTaskButton.removeAttribute("disabled", "");
+    }
+};
+
 taskName.forEach(name => {
     name.addEventListener('keyup', () => {
         // If input length for name is less than or equal to 8
@@ -59,6 +72,7 @@ taskName.forEach(name => {
             taskNameInvalidFeedback.style.display = "none";
             name.classList.remove("is-invalid")
         };
+        isInvalid(name);
     });
 });
 
@@ -73,6 +87,7 @@ descname.forEach(desc => {
             descnameInvalidFeedback.style.display = "none";
             desc.classList.remove("is-invalid")
         };
+        isInvalid(desc);
     });
 });
 
@@ -87,6 +102,7 @@ assigneename.forEach(assignee => {
             assigneenameInvalidFeedback.style.display = "none";
             assignee.classList.remove("is-invalid")
         };
+        isInvalid(assignee);
     });
 });
 
@@ -101,15 +117,13 @@ dueDate.forEach(dueDate => {
             dueDateError.style.display = "none";
             dueDate.classList.remove("is-invalid")
         };
+        isInvalid(dueDate);
     });
 });
 
+
 /****************   Create task   ****************/
-
-// const markDoneParent = document.querySelector(".status-container")
-// let markDoneButton = document.createElement("button");
-
-createTaskButton.addEventListener("submit", e => {
+newTaskForm.addEventListener("submit", e => {
     e.preventDefault();
     let taskName = e.target.taskname.value
     let description = e.target.description.value
@@ -164,13 +178,6 @@ createTaskButton.addEventListener("submit", e => {
         }
         
     }
-    
-    // const createMarkDoneButton = () => {
-    //     markDoneButton.classList.add("mark-done", "btn", "btn-success")
-    //     markDoneButton.setAttribute("type", "button")
-    //     markDoneButton.innerText = "Mark as done";
-    //     markDoneParent.insertAdjacentElement("beforeend", markDoneButton);
-    // }
 
     // Create Task
     const createTaskHTML = () => {
@@ -260,6 +267,15 @@ createTaskButton.addEventListener("submit", e => {
 //     // newTask.bind(this)
 //     console.log("It's working hereeee")
 // })
+// let markDoneButton = document.querySelectorAll(".mark-done");
+
+// markDoneButton.forEach(button => {
+//     button.addEventListener("click", () => {
+//         console.log("I'm here")
+//         console.log(markDoneButton)
+//     })
+// })
+
 
 $(document).on('click', '.mark-done', (e) => {
     console.log(e.target)

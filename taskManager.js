@@ -10,6 +10,7 @@ export default class TaskManager {
         this.assignedLName = assignedLName;
         this.dueDate = dueDate;
         this.status = status;
+        // this.newTask = []
     }
 
     getAllTasks() {
