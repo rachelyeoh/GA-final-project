@@ -248,7 +248,7 @@ $(document).on('click', '.mark-done', (e) => {
         <option class="bg-success" selected>Done</option>
     </select>`
     // Change to correct status in newTask array (task object)
-    insertNewTask.setDoneStatus(newTask[taskId])
+    insertNewTask.setDoneStatus(newTask[insertNewTask.getIndexOfTask(taskId)])
     // Move to 'Completed' container
     completedContainer.insertAdjacentElement("beforeend", e.target.parentElement.parentElement.parentElement.parentElement);
     // Remove mark as done button
@@ -260,7 +260,7 @@ $(document).on('click', '.delete-btn', (e) => {
     const taskWrapper = e.target.parentElement.parentElement.parentElement.parentElement
     // console.log(taskWrapper)
     const taskId = taskWrapper.getAttribute("data-id")
-    // insertNewTask.getTaskWithId(taskId)
+    // 
     insertNewTask.deleteTask(taskId)
     // Remove the task card
     $( taskWrapper ).remove();

@@ -39,6 +39,10 @@ export default class TaskManager {
         })
     }
 
+    getIndexOfTask(taskId) {
+        return newTask.findIndex(task => task.id == taskId)
+    }
+
     addTask() {
         newTask.push(this)
         localStorage.setItem("Tasks", JSON.stringify(newTask))
@@ -46,12 +50,11 @@ export default class TaskManager {
 
     setDoneStatus(task) {
         task.status = "Done"
+        console.log(newTask)
     }
 
     deleteTask(taskId) {
-        // NOT WORKING, NEED TO FIX THIS
-        this.getTaskWithId(taskId)
-        newTask.splice(taskId, 1)
+        newTask.splice(this.getIndexOfTask(taskId), 1)
         console.log(newTask)
     }
 };
