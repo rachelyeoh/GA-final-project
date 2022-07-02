@@ -116,6 +116,8 @@ dueDate.forEach(dueDate => {
     });
 });
 
+
+
 /****************   Create task   ****************/
 newTaskForm.addEventListener("submit", e => {
     e.preventDefault();
@@ -200,8 +202,9 @@ newTaskForm.addEventListener("submit", e => {
                     </div>
                     <div class="col-3">
                     <button
+                        id="edit-btn"
                         type="button"
-                        class="btn btn-warning m-2"
+                        class="btn btn-warning m-2 edit-btn"
                         data-bs-toggle="modal"
                         data-bs-target="#editTaskModal"
                     >
@@ -213,6 +216,7 @@ newTaskForm.addEventListener("submit", e => {
                 </div>
             </div>` 
         newTaskCard.innerHTML = taskCard
+        
     })};
     createTaskHTML();
 
@@ -232,8 +236,20 @@ newTaskForm.addEventListener("submit", e => {
 });
 
 
+/****************   Update Tasks   ****************/
+// Edit Task Form
+document.addEventListener("click", (e) => {
+    // Select task wrapper variable
+    const taskWrapper = e.target.parentElement.parentElement.parentElement.parentElement
+    // Get id of the selected task
+    const taskId = taskWrapper.getAttribute("data-id")
+    if (e.target.classList.contains("edit-btn")) {
+        insertNewTask.getTaskWithId(taskId)
+        
+    }
+});
 
-/****************   Update Tasks / Mark as Done button   ****************/
+// Mark as Done button
 $(document).on('click', '.mark-done', (e) => {
     // Select task wrapper variable
     const taskWrapper = e.target.parentElement.parentElement.parentElement.parentElement
@@ -250,7 +266,7 @@ $(document).on('click', '.mark-done', (e) => {
     // Change to correct status in newTask array (task object)
     insertNewTask.setDoneStatus(newTask[insertNewTask.getIndexOfTask(taskId)])
     // Move to 'Completed' container
-    completedContainer.insertAdjacentElement("beforeend", e.target.parentElement.parentElement.parentElement.parentElement);
+    completedContainer.insertAdjacentElement("beforeend", taskWrapper);
     // Remove mark as done button
     $( e.target ).remove();
 })
