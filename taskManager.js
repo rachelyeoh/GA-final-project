@@ -35,7 +35,6 @@ export default class TaskManager {
 
     // This method not working properly, need to check set Item to local storage. Sometimes there's delay
     getTaskWithId(id) {
-        console.log(this.parsedTasksObject)
         JSON.parse(localStorage.getItem("Tasks")).forEach(eachTaskObject => {
             console.log(eachTaskObject)
             if((eachTaskObject.id == id)) {

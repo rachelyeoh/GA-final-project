@@ -294,8 +294,10 @@ document.addEventListener("click", (e) => {
 
 /****************   Persist task on load   ****************/
 window.onload = () => {
-    for(let i = 0; i < JSON.parse(TaskManager.getAllTasks()).length; i++) {
-        newTask.push(JSON.parse(TaskManager.getAllTasks())[i])
+    if(JSON.parse(TaskManager.getAllTasks())) {
+        for(let i = 0; i < JSON.parse(TaskManager.getAllTasks()).length; i++) {
+            newTask.push(JSON.parse(TaskManager.getAllTasks())[i])
+        };
     };
     
     newTask.forEach(task => {
