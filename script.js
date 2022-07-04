@@ -160,6 +160,7 @@ const displayCorrectStatus = (status) => {
     
 }
 
+
  // Create Task
  const createTaskHTML = (task) => {
     // newTask.forEach(task => {
@@ -175,7 +176,7 @@ const displayCorrectStatus = (status) => {
                 </div>
                 <div class="col-3 status-container">
                     ${selectedOption}
-                    <button type="button" class="btn btn-success mark-done">Mark as done</button>
+                    ${task.status === "Done" ? `` : `<button type="button" class="btn btn-success mark-done">Mark as done</button>`}
                 </div>
                 <div class="row"></div>
                 <div class="col-5">
@@ -268,7 +269,7 @@ document.addEventListener("click", (e) => {
         console.log(TaskManager.getTaskWithId(taskId))
     };
 
-    /* Mark as Done Button * /
+    /*  Mark as Done Button */
     if (e.target.classList.contains("mark-done")) {
         // Change to correct status visually in task card
         e.target.previousElementSibling.innerHTML = 

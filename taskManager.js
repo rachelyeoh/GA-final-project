@@ -73,6 +73,7 @@ export default class TaskManager {
     // }
 
     static setDoneStatus(task) {
+        console.log(task)
         task.status = "Done"
         localStorage.clear()
         localStorage.setItem("Tasks", JSON.stringify(newTask))
