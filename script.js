@@ -268,7 +268,7 @@ document.addEventListener("click", (e) => {
         console.log(TaskManager.getTaskWithId(taskId))
     };
 
-    /* Mark as Done Button */
+    /* Mark as Done Button * /
     if (e.target.classList.contains("mark-done")) {
         // Change to correct status visually in task card
         e.target.previousElementSibling.innerHTML = 
