@@ -39,6 +39,7 @@ let dueDate = document.querySelectorAll(".duedate");
 const dueDateError = document.querySelector(".dueDateError")
 
 
+
 /****************   Display current date   ****************/
 const changeCurrentDate = () => {
     currentDateSpan.innerText = date;
@@ -236,48 +237,135 @@ newTaskForm.addEventListener("submit", e => {
 });
 
 
-/****************   Update Tasks   ****************/
-// Edit Task Form
 document.addEventListener("click", (e) => {
     // Select task wrapper variable
     const taskWrapper = e.target.parentElement.parentElement.parentElement.parentElement
     // Get id of the selected task
     const taskId = taskWrapper.getAttribute("data-id")
+
+    /****************   Update Tasks   ****************/
+    /* Edit Task form */
     if (e.target.classList.contains("edit-btn")) {
         insertNewTask.getTaskWithId(taskId)
-        
+    }
+
+    /* Mark as Done Button */
+    if (e.target.classList.contains("mark-done")) {
+        // Change to correct status visually in task card
+        e.target.previousElementSibling.innerHTML = 
+        `<select class="status">
+            <option class="bg-light">To do</option>
+            <option class="bg-warning">In Progress</option>
+            <option class="bg-danger">To review</option>
+            <option class="bg-success" selected>Done</option>
+        </select>`
+        // Change to correct status in newTask array (task object)
+        insertNewTask.setDoneStatus(newTask[insertNewTask.getIndexOfTask(taskId)])
+        // Move to 'Completed' container
+        completedContainer.insertAdjacentElement("beforeend", taskWrapper);
+        // Remove mark as done button
+        e.target.remove();
+    }
+
+
+    /****************   Delete Task   ****************/
+    if (e.target.classList.contains("delete-btn")) {
+        // delete task
+        insertNewTask.deleteTask(taskId)
+        console.log(insertNewTask)
+        // Remove the task card
+        taskWrapper.remove();
     }
 });
 
+/****************   Persist task on load   ****************/
+window.onload = () => {
+    
+    // if (TaskManager.getTasksWithStatus("To do").length > 1) {
+    //     todoContainer.insertAdjacentElement("beforeend", newTaskCard);
+    // } else if(TaskManager.getTasksWithStatus("To do").length > 1) {
+    //     inProgressContainer.insertAdjacentElement("beforeend", newTaskCard);
+    // } else if(status === "To review") {
+    //     toReviewContainer.insertAdjacentElement("beforeend", newTaskCard);
+    // } else if(status === "Done") {
+    //     completedContainer.insertAdjacentElement("beforeend", newTaskCard);
+    // }
+}
+
+
 // Mark as Done button
-$(document).on('click', '.mark-done', (e) => {
-    // Select task wrapper variable
-    const taskWrapper = e.target.parentElement.parentElement.parentElement.parentElement
-    // Get id of the selected task
-    const taskId = taskWrapper.getAttribute("data-id")
-    // Change to correct status visually in task card
-    e.target.previousElementSibling.innerHTML = 
-    `<select class="status">
-        <option class="bg-light">To do</option>
-        <option class="bg-warning">In Progress</option>
-        <option class="bg-danger">To review</option>
-        <option class="bg-success" selected>Done</option>
-    </select>`
-    // Change to correct status in newTask array (task object)
-    insertNewTask.setDoneStatus(newTask[insertNewTask.getIndexOfTask(taskId)])
-    // Move to 'Completed' container
-    completedContainer.insertAdjacentElement("beforeend", taskWrapper);
-    // Remove mark as done button
-    $( e.target ).remove();
-})
+// document.addEventListener("click", (e) => {
+//     // Select task wrapper variable
+//     const taskWrapper = e.target.parentElement.parentElement.parentElement.parentElement
+//     // Get id of the selected task
+//     const taskId = e.target.parentElement.getAttribute("data-id")
+
+//     if (e.target.classList.contains("mark-done")) {
+//         // Change to correct status visually in task card
+//         e.target.previousElementSibling.innerHTML = 
+//         `<select class="status">
+//             <option class="bg-light">To do</option>
+//             <option class="bg-warning">In Progress</option>
+//             <option class="bg-danger">To review</option>
+//             <option class="bg-success" selected>Done</option>
+//         </select>`
+//         // Change to correct status in newTask array (task object)
+//         insertNewTask.setDoneStatus(newTask[insertNewTask.getIndexOfTask(taskId)])
+//         // Move to 'Completed' container
+//         completedContainer.insertAdjacentElement("beforeend", taskWrapper);
+//         // Remove mark as done button
+//         e.target.remove();
+//     }
+// });
+
+// $(document).on('click', '.mark-done', (e) => {
+//     // Select task wrapper variable
+//     const taskWrapper = e.target.parentElement.parentElement.parentElement.parentElement
+//     // Get id of the selected task
+//     const taskId = taskWrapper.getAttribute("data-id")
+//     // Change to correct status visually in task card
+//     e.target.previousElementSibling.innerHTML = 
+//     `<select class="status">
+//         <option class="bg-light">To do</option>
+//         <option class="bg-warning">In Progress</option>
+//         <option class="bg-danger">To review</option>
+//         <option class="bg-success" selected>Done</option>
+//     </select>`
+//     // Change to correct status in newTask array (task object)
+//     insertNewTask.setDoneStatus(newTask[insertNewTask.getIndexOfTask(taskId)])
+//     // Move to 'Completed' container
+//     completedContainer.insertAdjacentElement("beforeend", taskWrapper);
+//     // Remove mark as done button
+//     $( e.target ).remove();
+// })
 
 /****************   Delete Task   ****************/
-$(document).on('click', '.delete-btn', (e) => {
-    const taskWrapper = e.target.parentElement.parentElement.parentElement.parentElement
-    // console.log(taskWrapper)
-    const taskId = taskWrapper.getAttribute("data-id")
-    // 
-    insertNewTask.deleteTask(taskId)
-    // Remove the task card
-    $( taskWrapper ).remove();
-})
+// document.addEventListener("click", (e) => {
+//     const taskWrapper = e.target.parentElement.parentElement.parentElement.parentElement
+//     console.log(taskWrapper)
+//     const taskId = taskWrapper.getAttribute("data-id")
+//     if (e.target.classList.contains("delete-btn")) {
+//         // delete task
+//         insertNewTask.deleteTask(taskId)
+//         console.log(insertNewTask)
+//         // Remove the task card
+//         taskWrapper.remove();
+//     }
+// });    
+// $(document).on('click', '.delete-btn', (e) => {
+//     const taskWrapper = e.target.parentElement.parentElement.parentElement.parentElement
+//     // console.log(taskWrapper)
+//     const taskId = taskWrapper.getAttribute("data-id")
+//     // 
+//     insertNewTask.deleteTask(taskId)
+//     // Remove the task card
+//     $( taskWrapper ).remove();
+// })
+
+
+
+    // Select task wrapper variable
+    // const taskWrapper = e.target.parentElement.parentElement.parentElement.parentElement
+    // Get id of the selected task
+    // const taskId = e.target.parentElement.getAttribute("data-id")
+// const taskId = e.target.getAttribute("data-id")
