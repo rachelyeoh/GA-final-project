@@ -13,19 +13,19 @@ export default class TaskManager {
         // this.newTask = []
     }
 
-    getAllTasks() {
-        localStorage.getItem("Tasks")
+    static getAllTasks() {
+        return localStorage.getItem("Tasks")
     }
 
     static getTasksWithStatus(status) {
         // const parsedTasksObject = JSON.parse(localStorage.getItem("Tasks"))
-        console.log(localStorage.getItem("Tasks"))
-        console.log(JSON.parse(localStorage.getItem("Tasks")))
+        // console.log(localStorage.getItem("Tasks"))
+        // console.log(JSON.parse(localStorage.getItem("Tasks")))
         JSON.parse(localStorage.getItem("Tasks")).forEach(eachTaskObject => {
             console.log(eachTaskObject)
-            console.log(status)
+            // console.log(status)
             if((eachTaskObject.status === status)) {
-                console.log("It's the same")
+                // console.log("It's the same")
                 return eachTaskObject
             } else {
                 return "No Task Found"
@@ -54,6 +54,22 @@ export default class TaskManager {
         newTask.push(this)
         localStorage.setItem("Tasks", JSON.stringify(newTask))
     }
+
+    // static render(status) {
+    //     let todoContainer = document.querySelector('#to-do');
+    //     let inProgressContainer = document.querySelector('#in-progress');
+    //     let toReviewContainer = document.querySelector('#to-review');
+    //     let completedContainer = document.querySelector('#completed');
+    //     if (status === "To do") {
+    //         todoContainer.insertAdjacentElement("beforeend", newTaskCard);
+    //     } else if(status === "In Progress") {
+    //         inProgressContainer.insertAdjacentElement("beforeend", newTaskCard);
+    //     } else if(status === "To review") {
+    //         toReviewContainer.insertAdjacentElement("beforeend", newTaskCard);
+    //     } else if(status === "Done") {
+    //         completedContainer.insertAdjacentElement("beforeend", newTaskCard);
+    //     }
+    // }
 
     setDoneStatus(task) {
         task.status = "Done"
