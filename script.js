@@ -216,29 +216,29 @@ const render = (status) => {
     }
 }
 
-const newInstanceOfTask = (e) => {
+// const newInstanceOfTask = (e) => {
+//     let taskName = e.target.taskname.value
+//     let description = e.target.description.value
+//     let assigneeFirstName = e.target.assigneeFName.value
+//     let assigneeLastName = e.target.assigneeLName.value
+//     let dueDate = e.target.dueDate.value
+//     let status = e.target.status.value
+//     // Create new instance
+//     insertNewTask = new TaskManager(taskName, description, assigneeFirstName, assigneeLastName, dueDate, status)
+// }
+
+
+newTaskForm.addEventListener("submit", e => {
+    e.preventDefault();
     let taskName = e.target.taskname.value
     let description = e.target.description.value
     let assigneeFirstName = e.target.assigneeFName.value
     let assigneeLastName = e.target.assigneeLName.value
     let dueDate = e.target.dueDate.value
     let status = e.target.status.value
-    // Create new instance
-    insertNewTask = new TaskManager(taskName, description, assigneeFirstName, assigneeLastName, dueDate, status)
-}
-
-
-newTaskForm.addEventListener("submit", e => {
-    e.preventDefault();
-    // let taskName = e.target.taskname.value
-    // let description = e.target.description.value
-    // let assigneeFirstName = e.target.assigneeFName.value
-    // let assigneeLastName = e.target.assigneeLName.value
-    // let dueDate = e.target.dueDate.value
-    // let status = e.target.status.value
     // // Create new instance
-    // insertNewTask = new TaskManager(taskName, description, assigneeFirstName, assigneeLastName, dueDate, status)
-    newInstanceOfTask(e)
+    insertNewTask = new TaskManager(taskName, description, assigneeFirstName, assigneeLastName, dueDate, status)
+    // newInstanceOfTask(e)
     // Call methods within TaskManager class
     insertNewTask.addTask();
     // insertNewTask.getAllTasks();
@@ -262,7 +262,10 @@ document.addEventListener("click", (e) => {
     /****************   Update Tasks   ****************/
     /* Edit Task form */
     if (e.target.classList.contains("edit-btn")) {
-        insertNewTask.getTaskWithId(taskId)
+        // console.log(taskWrapper)
+        // console.log(taskId)
+        console.log(taskWrapper)
+        console.log(TaskManager.getTaskWithId(taskId))
     };
 
     /* Mark as Done Button */
@@ -276,7 +279,7 @@ document.addEventListener("click", (e) => {
             <option class="bg-success" selected>Done</option>
         </select>`
         // Change to correct status in newTask array (task object)
-        insertNewTask.setDoneStatus(newTask[insertNewTask.getIndexOfTask(taskId)])
+        TaskManager.setDoneStatus(newTask[TaskManager.getIndexOfTask(taskId)])
         // Move to 'Completed' container
         completedContainer.insertAdjacentElement("beforeend", taskWrapper);
         // Remove mark as done button
@@ -286,7 +289,7 @@ document.addEventListener("click", (e) => {
     /****************   Delete Task   ****************/
     if (e.target.classList.contains("delete-btn")) {
         // delete task
-        insertNewTask.deleteTask(taskId)
+        TaskManager.deleteTask(taskId)
         // Remove the task card
         taskWrapper.remove();
     }

@@ -34,18 +34,20 @@ export default class TaskManager {
     }
 
     // This method not working properly, need to check set Item to local storage. Sometimes there's delay
-    getTaskWithId(id) {
-        JSON.parse(localStorage.getItem("Tasks")).forEach(eachTaskObject => {
-            console.log(eachTaskObject)
+    static getTaskWithId(id) {
+        // console.log(newTask)
+        newTask.forEach(eachTaskObject => {
             if((eachTaskObject.id == id)) {
+                console.log(eachTaskObject)
                 return eachTaskObject
-            } else {
-                console.log("No Task Found")
             }
+            // } else {
+            //     console.log("No Task Found")
+            // }
         })
     }
 
-    getIndexOfTask(taskId) {
+    static getIndexOfTask(taskId) {
         return newTask.findIndex(task => task.id == taskId)
     }
 
@@ -70,12 +72,13 @@ export default class TaskManager {
     //     }
     // }
 
-    setDoneStatus(task) {
+    static setDoneStatus(task) {
         task.status = "Done"
-        console.log(newTask)
+        localStorage.clear()
+        localStorage.setItem("Tasks", JSON.stringify(newTask))
     }
 
-    deleteTask(taskId) {
+    static deleteTask(taskId) {
         newTask.splice(this.getIndexOfTask(taskId), 1)
         localStorage.clear()
         localStorage.setItem("Tasks", JSON.stringify(newTask))
