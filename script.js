@@ -121,44 +121,44 @@ dueDate.forEach(dueDate => {
 
 /****************   Create task   ****************/
 let selectedOption
-    taskCard = ''
+taskCard = ''
 
-    const displayCorrectStatus = (status) => {
-        if (status === "To do") {
-            return selectedOption = 
-            `<select class="status">
-                        <option class="bg-light" selected>To do</option>
-                        <option class="bg-warning">In Progress</option>
-                        <option class="bg-danger">To review</option>
-                        <option class="bg-success">Done</option>
-            </select>` 
-        } else if(status === "In Progress") {
-            return selectedOption =
-            `<select class="status">
-                        <option class="bg-light">To do</option>
-                        <option class="bg-warning" selected>In Progress</option>
-                        <option class="bg-danger">To review</option>
-                        <option class="bg-success">Done</option>
-            </select>`
-        } else if(status === "To review") {
-            return selectedOption =
-            `<select class="status">
-                        <option class="bg-light">To do</option>
-                        <option class="bg-warning">In Progress</option>
-                        <option class="bg-danger" selected>To review</option>
-                        <option class="bg-success">Done</option>
-            </select>` 
-        } else if(status === "Done") {
-            return selectedOption =
-            `<select class="status">
-                        <option class="bg-light">To do</option>
-                        <option class="bg-warning">In Progress</option>
-                        <option class="bg-danger">To review</option>
-                        <option class="bg-success" selected>Done</option>
-            </select>` 
-        }
-        
+const displayCorrectStatus = (status) => {
+    if (status === "To do") {
+        return selectedOption = 
+        `<select class="status">
+                    <option class="bg-light" selected>To do</option>
+                    <option class="bg-warning">In Progress</option>
+                    <option class="bg-danger">To review</option>
+                    <option class="bg-success">Done</option>
+        </select>` 
+    } else if(status === "In Progress") {
+        return selectedOption =
+        `<select class="status">
+                    <option class="bg-light">To do</option>
+                    <option class="bg-warning" selected>In Progress</option>
+                    <option class="bg-danger">To review</option>
+                    <option class="bg-success">Done</option>
+        </select>`
+    } else if(status === "To review") {
+        return selectedOption =
+        `<select class="status">
+                    <option class="bg-light">To do</option>
+                    <option class="bg-warning">In Progress</option>
+                    <option class="bg-danger" selected>To review</option>
+                    <option class="bg-success">Done</option>
+        </select>` 
+    } else if(status === "Done") {
+        return selectedOption =
+        `<select class="status">
+                    <option class="bg-light">To do</option>
+                    <option class="bg-warning">In Progress</option>
+                    <option class="bg-danger">To review</option>
+                    <option class="bg-success" selected>Done</option>
+        </select>` 
     }
+    
+}
 
  // Create Task
  const createTaskHTML = (task) => {
@@ -215,11 +215,8 @@ const render = (status) => {
         completedContainer.insertAdjacentElement("beforeend", newTaskCard);
     }
 }
-// render();  
 
-
-newTaskForm.addEventListener("submit", e => {
-    e.preventDefault();
+const newInstanceOfTask = (e) => {
     let taskName = e.target.taskname.value
     let description = e.target.description.value
     let assigneeFirstName = e.target.assigneeFName.value
@@ -228,20 +225,31 @@ newTaskForm.addEventListener("submit", e => {
     let status = e.target.status.value
     // Create new instance
     insertNewTask = new TaskManager(taskName, description, assigneeFirstName, assigneeLastName, dueDate, status)
+}
+
+
+newTaskForm.addEventListener("submit", e => {
+    e.preventDefault();
+    // let taskName = e.target.taskname.value
+    // let description = e.target.description.value
+    // let assigneeFirstName = e.target.assigneeFName.value
+    // let assigneeLastName = e.target.assigneeLName.value
+    // let dueDate = e.target.dueDate.value
+    // let status = e.target.status.value
+    // // Create new instance
+    // insertNewTask = new TaskManager(taskName, description, assigneeFirstName, assigneeLastName, dueDate, status)
+    newInstanceOfTask(e)
     // Call methods within TaskManager class
     insertNewTask.addTask();
     // insertNewTask.getAllTasks();
     // insertNewTask.getTasksWithStatus("To do")
-    displayCorrectStatus(status);
+    displayCorrectStatus(e.target.status.value);
     newTask.forEach(task => {
         createTaskHTML(task)
     });
-    render(status);
-   
+    render(e.target.status.value);
     // Clear form
     e.target.reset()
-    
-
 });
 
 
@@ -279,7 +287,6 @@ document.addEventListener("click", (e) => {
     if (e.target.classList.contains("delete-btn")) {
         // delete task
         insertNewTask.deleteTask(taskId)
-        console.log(insertNewTask)
         // Remove the task card
         taskWrapper.remove();
     }

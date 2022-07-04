@@ -78,6 +78,7 @@ export default class TaskManager {
 
     deleteTask(taskId) {
         newTask.splice(this.getIndexOfTask(taskId), 1)
-        console.log(newTask)
+        localStorage.clear()
+        localStorage.setItem("Tasks", JSON.stringify(newTask))
     }
 };
