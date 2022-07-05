@@ -287,6 +287,59 @@ document.addEventListener("click", (e) => {
         e.target.remove();
     }
 
+    /*  Status options */
+    if (e.target.classList.contains("status")) {
+        e.target.addEventListener("change", () => {
+            // console.log(taskWrapper)
+            // console.log(newTask[TaskManager.getIndexOfTask(taskId)])
+            if(e.target.value === "To do") {
+                e.target.innerHTML = 
+                `<select class="status">
+                    <option class="bg-light" selected>To do</option>
+                    <option class="bg-warning">In Progress</option>
+                    <option class="bg-danger">To review</option>
+                    <option class="bg-success">Done</option>
+                </select>`
+                todoContainer.insertAdjacentElement("beforeend", taskWrapper)
+                newTask[TaskManager.getIndexOfTask(taskId)].status = "To do"
+                TaskManager.setitems()
+            } else if(e.target.value === "In Progress") {
+                e.target.innerHTML = 
+                `<select class="status">
+                    <option class="bg-light">To do</option>
+                    <option class="bg-warning" selected>In Progress</option>
+                    <option class="bg-danger">To review</option>
+                    <option class="bg-success">Done</option>
+                </select>`
+                inProgressContainer.insertAdjacentElement("beforeend", taskWrapper)
+                newTask[TaskManager.getIndexOfTask(taskId)].status = "In Progress"
+                TaskManager.setitems()
+            } else if(e.target.value === "To review") {
+                e.target.innerHTML = 
+                `<select class="status">
+                    <option class="bg-light">To do</option>
+                    <option class="bg-warning">In Progress</option>
+                    <option class="bg-danger" selected>To review</option>
+                    <option class="bg-success">Done</option>
+                </select>`
+                toReviewContainer.insertAdjacentElement("beforeend", taskWrapper);
+                newTask[TaskManager.getIndexOfTask(taskId)].status = "To review"
+                TaskManager.setitems()
+            } else if(e.target.value === "Done") {
+                e.target.innerHTML = 
+                `<select class="status">
+                    <option class="bg-light">To do</option>
+                    <option class="bg-warning">In Progress</option>
+                    <option class="bg-danger">To review</option>
+                    <option class="bg-success" selected>Done</option>
+                </select>`
+                completedContainer.insertAdjacentElement("beforeend", taskWrapper);
+                newTask[TaskManager.getIndexOfTask(taskId)].status = "Done"
+                TaskManager.setitems()
+            }
+        })
+    };
+
     /****************   Delete Task   ****************/
     if (e.target.classList.contains("delete-btn")) {
         // delete task
@@ -312,6 +365,12 @@ window.onload = () => {
 };
 
 
+// selectOptions.addEventListener("click", (e) => {
+//     console.log(e.target)
+    
+// })
+
+// console.log(selectOptions.hasAttribute("selected"))
 
 
 // TO DELETE CODES

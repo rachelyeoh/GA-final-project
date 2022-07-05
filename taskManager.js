@@ -72,16 +72,19 @@ export default class TaskManager {
     //     }
     // }
 
-    static setDoneStatus(task) {
-        console.log(task)
-        task.status = "Done"
+    static setitems() {
         localStorage.clear()
         localStorage.setItem("Tasks", JSON.stringify(newTask))
     }
 
+    static setDoneStatus(task) {
+        console.log(task)
+        task.status = "Done"
+        this.setitems()
+    }
+
     static deleteTask(taskId) {
         newTask.splice(this.getIndexOfTask(taskId), 1)
-        localStorage.clear()
-        localStorage.setItem("Tasks", JSON.stringify(newTask))
+        this.setitems()
     }
 };
