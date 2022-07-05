@@ -1,4 +1,5 @@
 /****************   Task Class/Object   ****************/
+import { createTaskHTML } from './script.js'
 export const newTask = [];
 export default class TaskManager {
     constructor(name, description, assignedFName, assignedLName, dueDate, status) {
@@ -9,8 +10,7 @@ export default class TaskManager {
         this.assignedLName = assignedLName;
         this.dueDate = dueDate;
         this.status = status;
-        // this.parsedTasksObject = JSON.parse(localStorage.getItem("Tasks"))
-        // this.newTask = []
+        this.idOfEditTask;
     }
 
     static getAllTasks() {
@@ -18,14 +18,9 @@ export default class TaskManager {
     }
 
     static getTasksWithStatus(status) {
-        // const parsedTasksObject = JSON.parse(localStorage.getItem("Tasks"))
-        // console.log(localStorage.getItem("Tasks"))
-        // console.log(JSON.parse(localStorage.getItem("Tasks")))
         JSON.parse(localStorage.getItem("Tasks")).forEach(eachTaskObject => {
             console.log(eachTaskObject)
-            // console.log(status)
             if((eachTaskObject.status === status)) {
-                // console.log("It's the same")
                 return eachTaskObject
             } else {
                 return "No Task Found"
@@ -35,21 +30,14 @@ export default class TaskManager {
 
     // This method not working properly, need to check set Item to local storage. Sometimes there's delay
     static displayValueOnForm(id) {
-        // console.log(newTask)
-        const editModal = document.querySelector("#editTaskModal")
         const taskName = document.querySelector("#editTaskModal .taskname")
         const desc = document.querySelector("#editTaskModal .descname")
         const assigneedFirstName = document.querySelector("#editTaskModal .assigneename")
         const assigneeLastName = document.querySelector("#editTaskModal .assigneeLName")
         const dueDate = document.querySelector("#editTaskModal .duedate")
         const status = document.querySelector("#editTaskModal #status")
-        
-        // console.log(taskName)
-        // console.log(desc)
-        // console.log(assigneedFirst)
-        // console.log(assigneeLast)
-        // console.log(dueDate)
-        // console.log(status)
+        this.idOfEditTask = id;
+        console.log(this.idOfEditTask)
         newTask.forEach(eachTaskObject => {
             if((eachTaskObject.id == id)) {
                 taskName.setAttribute("value", eachTaskObject.name)
@@ -74,12 +62,28 @@ export default class TaskManager {
                       status.selectedIndex = 3
                       console.log(status.selectedIndex)
                       break;
-                  }
+                }
             }
-            // } else {
-            //     console.log("No Task Found")
-            // }
         })
+    }
+
+    static updateTask() {
+        const taskName = document.querySelector("#editTaskModal .taskname")
+        const desc = document.querySelector("#editTaskModal .descname")
+        const assigneedFirstName = document.querySelector("#editTaskModal .assigneename")
+        const assigneeLastName = document.querySelector("#editTaskModal .assigneeLName")
+        const dueDate = document.querySelector("#editTaskModal .duedate")
+        const status = document.querySelector("#editTaskModal #status")
+        const thisTask = newTask[this.idOfEditTask]
+    
+        thisTask.name = taskName.value
+        thisTask.description = desc.textContent
+        thisTask.assignedFName = assigneedFirstName.value
+        thisTask.assignedLName = assigneeLastName.value
+        thisTask.dueDate = dueDate.value
+        thisTask.status = status.value
+        // Create task card
+        createTaskHTML(thisTask)
     }
 
     static getIndexOfTask(taskId) {

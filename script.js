@@ -47,7 +47,7 @@ const changeCurrentDate = () => {
 
 changeCurrentDate();
 
-// localStorage.clear()
+
 /****************   Form validation   ****************/
 const isInvalid = (element) => {
     if(element.classList.contains("is-invalid")) {
@@ -123,6 +123,7 @@ dueDate.forEach(dueDate => {
 let selectedOption
 taskCard = ''
 
+// Display correct status
 const displayCorrectStatus = (status) => {
     if (status === "To do") {
         return selectedOption = 
@@ -160,10 +161,8 @@ const displayCorrectStatus = (status) => {
     
 }
 
-
- // Create Task
- const createTaskHTML = (task) => {
-    // newTask.forEach(task => {
+ // Create Task card
+ export const createTaskHTML = (task) => {
         displayCorrectStatus();
         newTaskCard = document.createElement("div");
         taskCard = 
@@ -201,7 +200,6 @@ const displayCorrectStatus = (status) => {
             </div>
         </div>` 
     newTaskCard.innerHTML = taskCard
-// })
 };
 
 // Display Task
@@ -217,18 +215,8 @@ const render = (status) => {
     }
 }
 
-// const newInstanceOfTask = (e) => {
-//     let taskName = e.target.taskname.value
-//     let description = e.target.description.value
-//     let assigneeFirstName = e.target.assigneeFName.value
-//     let assigneeLastName = e.target.assigneeLName.value
-//     let dueDate = e.target.dueDate.value
-//     let status = e.target.status.value
-//     // Create new instance
-//     insertNewTask = new TaskManager(taskName, description, assigneeFirstName, assigneeLastName, dueDate, status)
-// }
 
-
+// Fire actions when new task form is submitted
 newTaskForm.addEventListener("submit", e => {
     e.preventDefault();
     let taskName = e.target.taskname.value
@@ -239,11 +227,9 @@ newTaskForm.addEventListener("submit", e => {
     let status = e.target.status.value
     // // Create new instance
     insertNewTask = new TaskManager(taskName, description, assigneeFirstName, assigneeLastName, dueDate, status)
-    // newInstanceOfTask(e)
+
     // Call methods within TaskManager class
     insertNewTask.addTask();
-    // insertNewTask.getAllTasks();
-    // insertNewTask.getTasksWithStatus("To do")
     displayCorrectStatus(e.target.status.value);
     newTask.forEach(task => {
         createTaskHTML(task)
@@ -253,12 +239,18 @@ newTaskForm.addEventListener("submit", e => {
     e.target.reset()
 });
 
+
 /****************   Update Tasks   ****************/
 const editModal = document.querySelector("#editTaskModal")
     editModal.addEventListener("submit", (e) => {
-    e.preventDefault();
-    console.log("WORKING") 
-})
+    // Change value inside array
+    TaskManager.updateTask();
+    // Update local storage
+    TaskManager.setitems();
+    // Display task card
+    const selectedStatus = e.target.children[4].lastElementChild.value
+    render(selectedStatus) 
+});
 
 document.addEventListener("click", (e) => {
     // Select task wrapper variable
@@ -269,28 +261,8 @@ document.addEventListener("click", (e) => {
     /****************   Update Tasks Continued...   ****************/
     /* Display value on Edit Task form */
     if (e.target.classList.contains("edit-btn")) {
-        // console.log(taskWrapper)
-        // console.log(taskId)
-        
-        // const taskName = document.querySelector("#editTaskModal .taskname")
-        // const desc = document.querySelector("#editTaskModal .descname")
-        // const assigneedFirst = document.querySelector("#editTaskModal .assigneename")
-        // const assigneeLast = document.querySelector("#editTaskModal .assigneeLName")
-        // const dueDate = document.querySelector("#editTaskModal .duedate")
-        // const status = document.querySelector("#editTaskModal #status")
-        // console.log(taskWrapper)
-        // console.log(taskWrapper)
-        
-        // console.log(taskName)
-        // console.log(desc)
-        // console.log(assigneedFirst)
-        // console.log(assigneeLast)
-        // console.log(dueDate)
-        // console.log(status)
         TaskManager.displayValueOnForm(taskId)
     };
-
-    
 
     /*  Mark as Done Button */
     if (e.target.classList.contains("mark-done")) {
@@ -313,33 +285,47 @@ document.addEventListener("click", (e) => {
     /*  Status options */
     if (e.target.classList.contains("status")) {
         e.target.addEventListener("change", () => {
-            // console.log(taskWrapper)
-            // console.log(newTask[TaskManager.getIndexOfTask(taskId)])
             if(e.target.value === "To do") {
+                // Display correct status
                 displayCorrectStatus(e.target.value)
+                // Update selected option
                 e.target.innerHTML = selectedOption
+                // Display updated task card
                 todoContainer.insertAdjacentElement("beforeend", taskWrapper)
+                // Update status in array
                 newTask[TaskManager.getIndexOfTask(taskId)].status = "To do"
                 // Update Local Storage
                 TaskManager.setitems()
             } else if(e.target.value === "In Progress") {
+                // Display correct status
                 displayCorrectStatus(e.target.value)
+                // Update selected option
                 e.target.innerHTML = selectedOption
+                // Display updated task card
                 inProgressContainer.insertAdjacentElement("beforeend", taskWrapper)
+                // Update status in array
                 newTask[TaskManager.getIndexOfTask(taskId)].status = "In Progress"
                 // Update Local Storage
                 TaskManager.setitems()
             } else if(e.target.value === "To review") {
+                // Display correct status
                 displayCorrectStatus(e.target.value)
+                // Update selected option
                 e.target.innerHTML = selectedOption
+                // Display updated task card
                 toReviewContainer.insertAdjacentElement("beforeend", taskWrapper);
+                // Update status in array
                 newTask[TaskManager.getIndexOfTask(taskId)].status = "To review"
                 // Update Local Storage
                 TaskManager.setitems()
             } else if(e.target.value === "Done") {
+                // Display correct status
                 displayCorrectStatus(e.target.value)
+                // Update selected option
                 e.target.innerHTML = selectedOption
+                // Display updated task card
                 completedContainer.insertAdjacentElement("beforeend", taskWrapper);
+                // Update status in array
                 newTask[TaskManager.getIndexOfTask(taskId)].status = "Done"
                 // Update Local Storage
                 TaskManager.setitems()
@@ -349,14 +335,12 @@ document.addEventListener("click", (e) => {
 
     /****************   Delete Task   ****************/
     if (e.target.classList.contains("delete-btn")) {
-        // delete task
+        // Delete task
         TaskManager.deleteTask(taskId)
         // Remove the task card
         taskWrapper.remove();
     }
 });
-
-
 
 
 /****************   Persist task on load   ****************/
@@ -366,7 +350,6 @@ window.onload = () => {
             newTask.push(JSON.parse(TaskManager.getAllTasks())[i])
         };
     };
-    
     newTask.forEach(task => {
         displayCorrectStatus(task.status)
         createTaskHTML(task)
@@ -770,3 +753,58 @@ window.onload = () => {
                 //     <option class="bg-danger">To review</option>
                 //     <option class="bg-success" selected>Done</option>
                 // </select>`
+
+
+
+                     // console.log(taskWrapper)
+        // console.log(taskId)
+        // idOfEditTask = taskId;
+        // const taskName = document.querySelector("#editTaskModal .taskname")
+        // const desc = document.querySelector("#editTaskModal .descname")
+        // const assigneedFirst = document.querySelector("#editTaskModal .assigneename")
+        // const assigneeLast = document.querySelector("#editTaskModal .assigneeLName")
+        // const dueDate = document.querySelector("#editTaskModal .duedate")
+        // const status = document.querySelector("#editTaskModal #status")
+        // console.log(taskWrapper)
+        // console.log(taskWrapper)
+        
+        // console.log(taskName)
+        // console.log(desc)
+        // console.log(assigneedFirst)
+        // console.log(assigneeLast)
+        // console.log(dueDate)
+        // console.log(status)
+
+
+           // if (e.target.classList.contains("save-changes")) {
+        
+    // };
+
+
+    // const newInstanceOfTask = (e) => {
+//     let taskName = e.target.taskname.value
+//     let description = e.target.description.value
+//     let assigneeFirstName = e.target.assigneeFName.value
+//     let assigneeLastName = e.target.assigneeLName.value
+//     let dueDate = e.target.dueDate.value
+//     let status = e.target.status.value
+//     // Create new instance
+//     insertNewTask = new TaskManager(taskName, description, assigneeFirstName, assigneeLastName, dueDate, status)
+// }
+
+
+  
+    // console.log(newTask[idOfEditTask])
+    // console.log(e.target.taskName)
+    // e.preventDefault();
+    // console.log(idOfEditTask)
+
+
+    // newInstanceOfTask(e)
+
+    // insertNewTask.getAllTasks();
+    // insertNewTask.getTasksWithStatus("To do")
+
+     
+    // switch(e.target.children[4].lastElementChild.selectedIndex) {
+        
