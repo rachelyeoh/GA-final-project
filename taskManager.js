@@ -28,7 +28,6 @@ export default class TaskManager {
         })
     }
 
-    // This method not working properly, need to check set Item to local storage. Sometimes there's delay
     static displayValueOnForm(id) {
         const taskName = document.querySelector("#editTaskModal .taskname")
         const desc = document.querySelector("#editTaskModal .descname")
