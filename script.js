@@ -293,48 +293,32 @@ document.addEventListener("click", (e) => {
             // console.log(taskWrapper)
             // console.log(newTask[TaskManager.getIndexOfTask(taskId)])
             if(e.target.value === "To do") {
-                e.target.innerHTML = 
-                `<select class="status">
-                    <option class="bg-light" selected>To do</option>
-                    <option class="bg-warning">In Progress</option>
-                    <option class="bg-danger">To review</option>
-                    <option class="bg-success">Done</option>
-                </select>`
+                displayCorrectStatus(e.target.value)
+                e.target.innerHTML = selectedOption
                 todoContainer.insertAdjacentElement("beforeend", taskWrapper)
                 newTask[TaskManager.getIndexOfTask(taskId)].status = "To do"
+                // Update Local Storage
                 TaskManager.setitems()
             } else if(e.target.value === "In Progress") {
-                e.target.innerHTML = 
-                `<select class="status">
-                    <option class="bg-light">To do</option>
-                    <option class="bg-warning" selected>In Progress</option>
-                    <option class="bg-danger">To review</option>
-                    <option class="bg-success">Done</option>
-                </select>`
+                displayCorrectStatus(e.target.value)
+                e.target.innerHTML = selectedOption
                 inProgressContainer.insertAdjacentElement("beforeend", taskWrapper)
                 newTask[TaskManager.getIndexOfTask(taskId)].status = "In Progress"
+                // Update Local Storage
                 TaskManager.setitems()
             } else if(e.target.value === "To review") {
-                e.target.innerHTML = 
-                `<select class="status">
-                    <option class="bg-light">To do</option>
-                    <option class="bg-warning">In Progress</option>
-                    <option class="bg-danger" selected>To review</option>
-                    <option class="bg-success">Done</option>
-                </select>`
+                displayCorrectStatus(e.target.value)
+                e.target.innerHTML = selectedOption
                 toReviewContainer.insertAdjacentElement("beforeend", taskWrapper);
                 newTask[TaskManager.getIndexOfTask(taskId)].status = "To review"
+                // Update Local Storage
                 TaskManager.setitems()
             } else if(e.target.value === "Done") {
-                e.target.innerHTML = 
-                `<select class="status">
-                    <option class="bg-light">To do</option>
-                    <option class="bg-warning">In Progress</option>
-                    <option class="bg-danger">To review</option>
-                    <option class="bg-success" selected>Done</option>
-                </select>`
+                displayCorrectStatus(e.target.value)
+                e.target.innerHTML = selectedOption
                 completedContainer.insertAdjacentElement("beforeend", taskWrapper);
                 newTask[TaskManager.getIndexOfTask(taskId)].status = "Done"
+                // Update Local Storage
                 TaskManager.setitems()
             }
         })
@@ -732,3 +716,31 @@ window.onload = () => {
 
     
 // }
+
+// e.target.innerHTML = 
+                // `<select class="status">
+                //     <option class="bg-light" selected>To do</option>
+                //     <option class="bg-warning">In Progress</option>
+                //     <option class="bg-danger">To review</option>
+                //     <option class="bg-success">Done</option>
+                // </select>`
+  // `<select class="status">
+                //     <option class="bg-light">To do</option>
+                //     <option class="bg-warning" selected>In Progress</option>
+                //     <option class="bg-danger">To review</option>
+                //     <option class="bg-success">Done</option>
+                // </select>`
+                // e.target.innerHTML = 
+                // `<select class="status">
+                //     <option class="bg-light">To do</option>
+                //     <option class="bg-warning">In Progress</option>
+                //     <option class="bg-danger" selected>To review</option>
+                //     <option class="bg-success">Done</option>
+                // </select>`
+  // e.target.innerHTML = 
+                // `<select class="status">
+                //     <option class="bg-light">To do</option>
+                //     <option class="bg-warning">In Progress</option>
+                //     <option class="bg-danger">To review</option>
+                //     <option class="bg-success" selected>Done</option>
+                // </select>`
