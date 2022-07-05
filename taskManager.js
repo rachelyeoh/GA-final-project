@@ -34,12 +34,47 @@ export default class TaskManager {
     }
 
     // This method not working properly, need to check set Item to local storage. Sometimes there's delay
-    static getTaskWithId(id) {
+    static displayValueOnForm(id) {
         // console.log(newTask)
+        const editModal = document.querySelector("#editTaskModal")
+        const taskName = document.querySelector("#editTaskModal .taskname")
+        const desc = document.querySelector("#editTaskModal .descname")
+        const assigneedFirstName = document.querySelector("#editTaskModal .assigneename")
+        const assigneeLastName = document.querySelector("#editTaskModal .assigneeLName")
+        const dueDate = document.querySelector("#editTaskModal .duedate")
+        const status = document.querySelector("#editTaskModal #status")
+        
+        // console.log(taskName)
+        // console.log(desc)
+        // console.log(assigneedFirst)
+        // console.log(assigneeLast)
+        // console.log(dueDate)
+        // console.log(status)
         newTask.forEach(eachTaskObject => {
             if((eachTaskObject.id == id)) {
-                console.log(eachTaskObject)
-                return eachTaskObject
+                taskName.setAttribute("value", eachTaskObject.name)
+                desc.innerText = eachTaskObject.description
+                assigneedFirstName.setAttribute("value", eachTaskObject.assignedFName)
+                assigneeLastName.setAttribute("value", eachTaskObject.assignedLName)
+                dueDate.setAttribute("value", eachTaskObject.dueDate)
+                switch(eachTaskObject.status) {
+                    case "To do":
+                      status.selectedIndex = 0
+                      console.log(status.selectedIndex)
+                      break;
+                    case "In Progress":
+                      status.selectedIndex = 1
+                      console.log(status.selectedIndex)
+                      break;
+                    case "To review":
+                      status.selectedIndex = 2
+                      console.log(status.selectedIndex)
+                      break;
+                    case "Done":
+                      status.selectedIndex = 3
+                      console.log(status.selectedIndex)
+                      break;
+                  }
             }
             // } else {
             //     console.log("No Task Found")

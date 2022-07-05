@@ -253,6 +253,12 @@ newTaskForm.addEventListener("submit", e => {
     e.target.reset()
 });
 
+/****************   Update Tasks   ****************/
+const editModal = document.querySelector("#editTaskModal")
+    editModal.addEventListener("submit", (e) => {
+    e.preventDefault();
+    console.log("WORKING") 
+})
 
 document.addEventListener("click", (e) => {
     // Select task wrapper variable
@@ -260,14 +266,31 @@ document.addEventListener("click", (e) => {
     // Get id of the selected task
     const taskId = taskWrapper.getAttribute("data-id")
 
-    /****************   Update Tasks   ****************/
-    /* Edit Task form */
+    /****************   Update Tasks Continued...   ****************/
+    /* Display value on Edit Task form */
     if (e.target.classList.contains("edit-btn")) {
         // console.log(taskWrapper)
         // console.log(taskId)
-        console.log(taskWrapper)
-        console.log(TaskManager.getTaskWithId(taskId))
+        
+        // const taskName = document.querySelector("#editTaskModal .taskname")
+        // const desc = document.querySelector("#editTaskModal .descname")
+        // const assigneedFirst = document.querySelector("#editTaskModal .assigneename")
+        // const assigneeLast = document.querySelector("#editTaskModal .assigneeLName")
+        // const dueDate = document.querySelector("#editTaskModal .duedate")
+        // const status = document.querySelector("#editTaskModal #status")
+        // console.log(taskWrapper)
+        // console.log(taskWrapper)
+        
+        // console.log(taskName)
+        // console.log(desc)
+        // console.log(assigneedFirst)
+        // console.log(assigneeLast)
+        // console.log(dueDate)
+        // console.log(status)
+        TaskManager.displayValueOnForm(taskId)
     };
+
+    
 
     /*  Mark as Done Button */
     if (e.target.classList.contains("mark-done")) {
@@ -332,6 +355,9 @@ document.addEventListener("click", (e) => {
         taskWrapper.remove();
     }
 });
+
+
+
 
 /****************   Persist task on load   ****************/
 window.onload = () => {
