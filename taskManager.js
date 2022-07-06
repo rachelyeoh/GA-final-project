@@ -1,5 +1,5 @@
 /****************   Task Class/Object   ****************/
-import { createTaskHTML } from './script.js'
+import { createTaskHTML, editTaskName, editDesc, editAssigneedFirstName, editAssigneeLastName, editDueDate, editStatus } from './script.js'
 export const newTask = [];
 export default class TaskManager {
     constructor(name, description, assignedFName, assignedLName, dueDate, status) {
@@ -13,53 +13,49 @@ export default class TaskManager {
         this.idOfEditTask;
     }
 
+    addTask() {
+        newTask.push(this)
+        localStorage.setItem("Tasks", JSON.stringify(newTask))
+    }
+
     static getAllTasks() {
         return localStorage.getItem("Tasks")
     }
 
-    static getTasksWithStatus(status) {
-        JSON.parse(localStorage.getItem("Tasks")).forEach(eachTaskObject => {
-            console.log(eachTaskObject)
-            if((eachTaskObject.status === status)) {
-                return eachTaskObject
-            } else {
-                return "No Task Found"
-            }
-        })
-    }
+    //***NOTE: THIS IS EXTRA CODE/NOT USED AS KRUTI STEP BY STEP GUIDE SHOW TO INCLUDE THIS
+    // static getTasksWithStatus(status) {
+    //     JSON.parse(localStorage.getItem("Tasks")).forEach(eachTaskObject => {
+    //         console.log(eachTaskObject)
+    //         if((eachTaskObject.status === status)) {
+    //             return eachTaskObject
+    //         } else {
+    //             return "No Task Found"
+    //         }
+    //     });
+    // };
 
     static displayValueOnForm(id) {
-        const taskName = document.querySelector("#editTaskModal .taskname")
-        const desc = document.querySelector("#editTaskModal .descname")
-        const assigneedFirstName = document.querySelector("#editTaskModal .assigneename")
-        const assigneeLastName = document.querySelector("#editTaskModal .assigneeLName")
-        const dueDate = document.querySelector("#editTaskModal .duedate")
-        const status = document.querySelector("#editTaskModal #status")
+        // Set id of this particular task
         this.idOfEditTask = id;
-        console.log(this.idOfEditTask)
         newTask.forEach(eachTaskObject => {
             if((eachTaskObject.id == id)) {
-                taskName.setAttribute("value", eachTaskObject.name)
-                desc.innerText = eachTaskObject.description
-                assigneedFirstName.setAttribute("value", eachTaskObject.assignedFName)
-                assigneeLastName.setAttribute("value", eachTaskObject.assignedLName)
-                dueDate.setAttribute("value", eachTaskObject.dueDate)
+                editTaskName.setAttribute("value", eachTaskObject.name)
+                editDesc.innerText = eachTaskObject.description
+                editAssigneedFirstName.setAttribute("value", eachTaskObject.assignedFName)
+                editAssigneeLastName.setAttribute("value", eachTaskObject.assignedLName)
+                editDueDate.setAttribute("value", eachTaskObject.dueDate)
                 switch(eachTaskObject.status) {
                     case "To do":
-                      status.selectedIndex = 0
-                      console.log(status.selectedIndex)
+                      editStatus.selectedIndex = 0
                       break;
                     case "In Progress":
-                      status.selectedIndex = 1
-                      console.log(status.selectedIndex)
+                      editStatus.selectedIndex = 1
                       break;
                     case "To review":
-                      status.selectedIndex = 2
-                      console.log(status.selectedIndex)
+                     editStatus.selectedIndex = 2
                       break;
                     case "Done":
-                      status.selectedIndex = 3
-                      console.log(status.selectedIndex)
+                      editStatus.selectedIndex = 3
                       break;
                 }
             }
@@ -67,20 +63,15 @@ export default class TaskManager {
     }
 
     static updateTask() {
-        const taskName = document.querySelector("#editTaskModal .taskname")
-        const desc = document.querySelector("#editTaskModal .descname")
-        const assigneedFirstName = document.querySelector("#editTaskModal .assigneename")
-        const assigneeLastName = document.querySelector("#editTaskModal .assigneeLName")
-        const dueDate = document.querySelector("#editTaskModal .duedate")
-        const status = document.querySelector("#editTaskModal #status")
+        // Get this particular task card from new task array
         const thisTask = newTask[this.idOfEditTask]
-    
-        thisTask.name = taskName.value
-        thisTask.description = desc.textContent
-        thisTask.assignedFName = assigneedFirstName.value
-        thisTask.assignedLName = assigneeLastName.value
-        thisTask.dueDate = dueDate.value
-        thisTask.status = status.value
+        // Change the value internally
+        thisTask.name = editTaskName.value
+        thisTask.description = editDesc.textContent
+        thisTask.assignedFName = editAssigneedFirstName.value
+        thisTask.assignedLName = editAssigneeLastName.value
+        thisTask.dueDate = editDueDate.value
+        thisTask.status = editStatus.value
         // Create task card
         createTaskHTML(thisTask)
     }
@@ -89,40 +80,24 @@ export default class TaskManager {
         return newTask.findIndex(task => task.id == taskId)
     }
 
-    addTask() {
-        newTask.push(this)
-        localStorage.setItem("Tasks", JSON.stringify(newTask))
-    }
-
-    // static render(status) {
-    //     let todoContainer = document.querySelector('#to-do');
-    //     let inProgressContainer = document.querySelector('#in-progress');
-    //     let toReviewContainer = document.querySelector('#to-review');
-    //     let completedContainer = document.querySelector('#completed');
-    //     if (status === "To do") {
-    //         todoContainer.insertAdjacentElement("beforeend", newTaskCard);
-    //     } else if(status === "In Progress") {
-    //         inProgressContainer.insertAdjacentElement("beforeend", newTaskCard);
-    //     } else if(status === "To review") {
-    //         toReviewContainer.insertAdjacentElement("beforeend", newTaskCard);
-    //     } else if(status === "Done") {
-    //         completedContainer.insertAdjacentElement("beforeend", newTaskCard);
-    //     }
-    // }
-
     static setitems() {
+        // Clear local storage
         localStorage.clear()
+        // Set items to local storage
         localStorage.setItem("Tasks", JSON.stringify(newTask))
     }
 
     static setDoneStatus(task) {
-        console.log(task)
+        // Set status to 'Done'
         task.status = "Done"
+        // Update local storage
         this.setitems()
     }
 
     static deleteTask(taskId) {
+        // Remove task internally from array
         newTask.splice(this.getIndexOfTask(taskId), 1)
+        // Update local storage
         this.setitems()
     }
 };
